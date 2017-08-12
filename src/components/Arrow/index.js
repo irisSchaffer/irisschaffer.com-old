@@ -5,7 +5,9 @@ import classnames from 'classnames'
 import styles from './styles.css'
 
 const Arrow = ({ className }) => (
-	<span className={classnames(styles.root, className)} />
+	<span  className={classnames(styles.root, className)} >
+		<span className={classnames(styles.arrow)} />
+	</span>
 )
 
 Arrow.propTypes = {

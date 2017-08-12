@@ -1,7 +1,18 @@
 .root {
+	width: 53px;
+	height: 28px;
+	margin-right: 2px;
 	display: inline-block;
+
+	&:hover .arrow:before {
+		width: 53px;
+	}
+}
+
+.arrow {
 	width: 50px;
 	height: 3px;
+	display: inline-block;
 	position: relative;
 	background-color: var(--darkGray);
 
@@ -10,13 +21,30 @@
 		height: 20px;
 		position: absolute;
 		top: -8px;
-		right: 1px;
+		right: 2px;
 
 		border-right: 3px solid var(--darkGray);
 		border-top: 3px solid var(--darkGray);
 
-		content: '';
+		content: "";
 
 		transform: rotate(45deg);
+	}
+
+	&:before {
+		width: 0;
+		height: 32px;
+		position: absolute;
+		left: 0;
+		z-index: 1;
+
+		background-color: var(--swatchPrimary);
+		mix-blend-mode: lighten;
+
+		content: "";
+
+		transform: translateY(-50%);
+
+		transition: width 0.2s;
 	}
 }

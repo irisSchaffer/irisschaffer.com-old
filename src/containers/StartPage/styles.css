@@ -1,4 +1,6 @@
 .posts {
+	background-color: var(--white);
+
 	> *:nth-child(2) {
 		background-color: var(--lightGray);
 	}
