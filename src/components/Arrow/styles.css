@@ -1,0 +1,22 @@
+.root {
+	display: inline-block;
+	width: 50px;
+	height: 3px;
+	position: relative;
+	background-color: var(--darkGray);
+
+	&:after {
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		top: -8px;
+		right: 1px;
+
+		border-right: 3px solid var(--darkGray);
+		border-top: 3px solid var(--darkGray);
+
+		content: '';
+
+		transform: rotate(45deg);
+	}
+}

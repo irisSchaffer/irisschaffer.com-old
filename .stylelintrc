@@ -1,0 +1,139 @@
+{
+  "extends": "stylelint-config-wordpress",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "global"
+        ]
+      }
+    ],
+    "media-feature-no-missing-punctuation": null,
+    "rule-non-nested-empty-line-before": null,
+    "rule-nested-empty-line-before": null,
+    "rule-empty-line-before": [
+      "always",
+      {
+        "ignore": ["after-comment", "inside-block"]
+      }
+    ],
+    "block-closing-brace-newline-after": [
+      "never-single-line"
+    ],
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "except": ["blockless-after-same-name-blockless", "first-nested"],
+        "ignore": ["after-comment"]
+      }
+    ],
+    "order/order": [
+      "custom-properties",
+      "dollar-variables",
+      "declarations",
+      "rules",
+      "at-rules"
+    ],
+    "order/properties-order": [
+      {
+        "emptyLineBefore": "always",
+        "properties": [
+          "width",
+          "min-width",
+          "max-width",
+          "height",
+          "min-height",
+          "max-height",
+          "margin",
+          "padding",
+          "box-sizing",
+          "display",
+          "flex",
+          "table",
+          "empty-cells",
+          "position",
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "z-index",
+          "float",
+          "clear",
+          "overflow"
+        ]
+      },
+      {
+        "emptyLineBefore": "always",
+        "properties": [
+          "border",
+          "box-shadow",
+          "outline"
+        ]
+      },
+      {
+        "emptyLineBefore": "always",
+        "properties": [
+          "background"
+        ]
+      },
+      {
+        "emptyLineBefore": "always",
+        "order": "flexible",
+        "properties": [
+          "font",
+          "text",
+          "line-height",
+          "letter-spacing",
+          "white-space",
+          "word",
+          "hyphens",
+          "color",
+          "tab-size",
+          "vertical-align",
+          "list-style"
+        ]
+      },
+      {
+        "emptyLineBefore": "always",
+        "properties": [
+          "content"
+        ]
+      },
+      {
+        "emptyLineBefore": "always",
+        "order": "flexible",
+        "properties": [
+          "fill",
+          "stroke",
+          "shape-rendering"
+        ]
+      },
+      {
+        "emptyLineBefore": "always",
+        "order": "flexible",
+        "properties": [
+          "animation",
+          "caption-side",
+          "clip",
+          "counter",
+          "cursor",
+          "filter",
+          "nav",
+          "opacity",
+          "pointer-events",
+          "quotes",
+          "resize",
+          "transform",
+          "transition",
+          "user-select",
+          "visibility",
+          "zoom"
+        ]
+      }
+    ]
+  }
+}

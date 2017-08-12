@@ -1,0 +1,9 @@
+.root {
+	color: var(--white);
+	background-color: var(--swatchPrimary);
+
+	width: 100%;
+	padding: 30px 0;
+
+	text-align: center;
+}

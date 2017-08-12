@@ -1,0 +1,29 @@
+.root {
+	width: 100%;
+	padding: 60px 0;
+
+	color: var(--white);
+	background-color: var(--swatchPrimary);
+
+	text-align: center;
+
+	> * + * {
+		margin-top: 10px;
+	}
+
+	h1 {
+		font-size: 4em;
+	}
+
+	h2 {
+		font-size: 1.3em;
+		font-weight: 400;
+		opacity: .7;
+	}
+
+	img {
+		width: 120px;
+		border-radius: 100%;
+		border: 1px solid var(--white);
+	}
+}

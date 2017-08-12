@@ -1,0 +1,5 @@
+.posts {
+	> *:nth-child(2) {
+		background-color: var(--lightGray);
+	}
+}

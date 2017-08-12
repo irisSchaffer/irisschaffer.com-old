@@ -1,0 +1,123 @@
+@import 'sanitize.css/sanitize.css';
+
+html {
+	height: 100%;
+	position: relative;
+
+	font-size: 10px;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+body {
+	height: 100%;
+
+	background-color: var(--swatchBody);
+
+	color: var(--swatchFont);
+	font-family: var(--fontPrimary);
+	font-size: 1.4rem;
+	font-weight: 400;
+	letter-spacing: .05em;
+	line-height: 1.4em;
+	text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, address, label, table, td, th, ul, ol, dl, hr, form {
+	margin: 1em 0 0;
+
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--fontPrimary);
+	font-style: oblique;
+	font-weight: 900;
+	line-height: 1.2em;
+	-webkit-font-smoothing: auto;
+}
+
+h4, h5, h6 {
+	font-style: normal;
+}
+
+h1 {
+	font-size: 3.6rem;
+}
+
+h2 {
+	font-size: 3.6rem;
+}
+
+h3 {
+	font-size: 1.6rem;
+}
+
+h4 {
+	font-size: 1.4rem;
+}
+
+h5 {
+	font-size: inherit;
+}
+
+h6 {
+	font-size: inherit;
+}
+
+a {
+	color: inherit;
+	text-decoration: underline;
+
+	cursor: pointer;
+}
+
+strong {
+	font-weight: 900;
+}
+
+hr {
+	border-color: #dedede;
+	border-style: solid;
+	border-width: 1px 0 0;
+}
+
+input[type="search"] {
+	box-sizing: border-box;
+
+	appearance: none;
+}
+
+button {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+
+	border: 0;
+	outline: 0;
+
+	background: none;
+
+	line-height: 1;
+	vertical-align: middle;
+	white-space: normal;
+
+	cursor: pointer;
+	transition: color .2s ease;
+	user-select: none;
+}
+
+img, svg {
+	max-width: 100%;
+	height: auto;
+}
+
+ul, ol {
+	margin: 1em 0;
+	padding-left: 10px;
+
+	list-style-position: inside;
+}
