@@ -1,7 +1,16 @@
 .posts {
 	background-color: var(--white);
 
-	> *:nth-child(2) {
+	> *:nth-child(even) {
 		background-color: var(--lightGray);
+	}
+}
+
+.loadMoreSection {
+	padding: 20px 0;
+	text-align: center;
+
+	@media (--tabletUp) {
+		padding: 40px 0;
 	}
 }

@@ -17,7 +17,7 @@ const sortedPostsSelector = createSelector(
 		const sortedPosts = posts
 			.toList()
 			.sort((a, b) => (
-				a.publishedAtDate().valueOf() - b.publishedAtDate().valueOf()
+				b.publishedAtDate().valueOf() - a.publishedAtDate().valueOf()
 			))
 			.filter(post => !startPage.selected.includes(post.id))
 

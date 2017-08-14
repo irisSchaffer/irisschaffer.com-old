@@ -19,7 +19,8 @@ export const postsSelector = createSelector(
 	content => content.get('posts')
 )
 
-export const postBySlugSelector = slug => createSelector(
+export const postBySlugSelector = createSelector(
 	postsSelector,
-	posts => posts.find(post => post.get('slugs').containts(slug))
+	(state, slug) => slug,
+	(posts, slug) => posts.find(post => post.slugs.includes(slug))
 )

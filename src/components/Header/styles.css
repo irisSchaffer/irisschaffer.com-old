@@ -1,6 +1,6 @@
 .root {
 	width: 100%;
-	padding: 60px 0;
+	padding: 20px;
 
 	color: var(--white);
 	background-color: var(--swatchPrimary);
@@ -11,19 +11,21 @@
 		margin-top: 10px;
 	}
 
-	h1 {
-		font-size: 4em;
-	}
-
 	h2 {
-		font-size: 1.3em;
-		font-weight: 400;
-		opacity: .7;
+		font-size: 2rem;
+		font-weight: 300;
+
+		opacity: 0.7;
 	}
 
 	img {
 		width: 120px;
-		border-radius: 100%;
+
 		border: 1px solid var(--white);
+		border-radius: 100%;
+	}
+
+	@media (--tabletUp) {
+		padding: 60px 20px;
 	}
 }

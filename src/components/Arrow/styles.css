@@ -11,7 +11,7 @@
 
 .arrow {
 	width: 50px;
-	height: 3px;
+	height: 4px;
 	display: inline-block;
 	position: relative;
 	background-color: var(--darkGray);
@@ -23,8 +23,8 @@
 		top: -8px;
 		right: 2px;
 
-		border-right: 3px solid var(--darkGray);
-		border-top: 3px solid var(--darkGray);
+		border-right: 4px solid var(--darkGray);
+		border-top: 4px solid var(--darkGray);
 
 		content: "";
 
@@ -45,6 +45,6 @@
 
 		transform: translateY(-50%);
 
-		transition: width 0.2s;
+		transition: width 0.2s ease;
 	}
 }

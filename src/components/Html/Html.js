@@ -9,7 +9,7 @@ const Html = ({ content, state, assets = {}, chunks = {}, icons = {}, dev }) => 
 		head.meta.toString(),
 		head.link.toString(),
 		...(icons && icons.html || []),
-		'<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">',
+		'<link href="https://fonts.googleapis.com/css?family=Lato:300,900" rel="stylesheet">',
 		!dev && `<link rel="stylesheet" type="text/css" href=${assets.client.css} />` || ''
 	]
 	const htmlAttrs = head.htmlAttributes.toComponent()

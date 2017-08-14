@@ -9,7 +9,7 @@ const initialSate = new Map({
 export default function (state = initialSate, { type, ...payload }) {
 	switch (type) {
 		case constants.LOAD_MORE :
-			return state.update('shownPosts', payload.amount)
+			return state.update('shownPosts', shown => shown + payload.amount)
 
 		default :
 			return state

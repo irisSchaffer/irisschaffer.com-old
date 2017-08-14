@@ -1,0 +1,162 @@
+.articleSection,
+.shareSection,
+.shareWrapper {
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 20px;
+	position: relative;
+
+	@media (--tabletUp) {
+		padding: 60px 40px;
+	}
+}
+
+.articleSection {
+	position: relative;
+
+	article {
+		max-width: 800px;
+
+		@media (--tabletUp) {
+			width: 80%;
+		}
+
+		@media (--desktopBig) {
+			width: 50%;
+		}
+	}
+
+	@media (--tabletUp) {
+		display: flex;
+	}
+}
+
+.meta {
+	@media (--tabletUp) {
+		width: 20%;
+		padding-right: 20px;
+		text-align: right;
+
+		position: relative;
+		top: 0.4em;
+	}
+
+	@media (--desktopBig) {
+		width: 40%;
+	}
+}
+
+.title {
+	font-size: 4.8rem;
+
+	&:after {
+		width: 10%;
+		height: 3px;
+		margin: 20px 0;
+		display: block;
+		background-color: var(--swatchPrimary);
+
+		content: "";
+	}
+}
+
+.shareSection {
+	width: 100%;
+	max-width: initial;
+
+	padding: 20px;
+
+	background-color: var(--lightGray);
+
+	text-align: center;
+	font-size: 3.6rem;
+	font-weight: 900;
+
+	.svg {
+		display: inline;
+		position: relative;
+
+		cursor: pointer;
+
+		&:before,
+		&:after {
+			width: 100%;
+			height: 3px;
+			display: inline-block;
+			position: absolute;
+			bottom: -5px;
+			left: 0.15em;
+
+			background-color: var(--swatchPrimary);
+
+			content: "";
+		}
+
+		&:after {
+			width: 0;
+			background-color: var(--darkGray);
+
+			transition: width 0.2s ease;
+		}
+
+		&:hover:after {
+			width: 100%;
+		}
+
+		svg {
+			height: 0.8em;
+			margin-left: 0.3em;
+
+			position: relative;
+			bottom: 0.1em;
+		}
+	}
+
+	@media (--tabletUp) {
+		padding: 40px 0;
+	}
+}
+
+.shareWrapper {
+	display: none;
+
+	pointer-events: none;
+
+	@media (--tabletUp) {
+		padding: 0 40px;
+		display: block;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+}
+
+.relativeShareWrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.fixedShare {
+	width: 20%;
+	padding-right: 20px;
+
+	position: absolute;
+	bottom: 20px;
+
+	text-align: right;
+
+	svg {
+		height: 1em;
+
+		& + svg {
+			margin-left: 0.5em;
+		}
+	}
+
+	@media (--desktopBig) {
+		width: 40%;
+	}
+}

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Link from 'components/Link'
-import TextStagger from 'components/TextStagger'
 
 import styles from './styles.css'
 
@@ -11,17 +10,19 @@ class Button extends Component {
 	static propTypes = {
 		className : PropTypes.string,
 		children  : PropTypes.node,
-		text      : PropTypes.string,
 		theme     : PropTypes.oneOf(['default']),
-		size      : PropTypes.oneOf(['small', 'medium', 'large'])
+		size      : PropTypes.oneOf(['small', 'medium', 'large']),
+		href      : PropTypes.string,
+		loading   : PropTypes.bool
 	}
 
 	static defaultProps = {
 		className : '',
 		children  : null,
-		text      : '',
 		theme     : 'default',
-		size      : 'medium'
+		size      : 'medium',
+		href      : undefined,
+		loading   : false
 	}
 
 	getElement() {
@@ -33,25 +34,20 @@ class Button extends Component {
 			styles.root,
 			styles[this.props.theme],
 			styles[this.props.size],
-			{ [styles.useStagger] : this.props.text },
+			{ [styles.loading] : this.props.loading },
 			this.props.className
 		)
 	}
 
 	render() {
-		const { children, text, theme, size, ...restProps } = this.props
+		const { children, theme, size, ...restProps } = this.props
+		delete restProps.loading
 
 		const Element = this.getElement()
 
 		return (
 			<Element {...restProps} className={this.getClassName()}>
-				<span className={styles.content}>
-					{text && (
-						<TextStagger className={styles.stagger} text={text} />
-					) || (
-						children
-					)}
-				</span>
+				{children}
 			</Element>
 		)
 	}

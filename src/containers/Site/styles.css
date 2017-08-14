@@ -17,14 +17,32 @@ body {
 
 	color: var(--swatchFont);
 	font-family: var(--fontPrimary);
-	font-size: 1.4rem;
-	font-weight: 400;
-	letter-spacing: .05em;
-	line-height: 1.4em;
+	font-size: 1.8rem;
+	font-weight: 300;
+	letter-spacing: 0.03em;
+	line-height: 1.4;
 	text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, h5, h6, p, pre, blockquote, address, label, table, td, th, ul, ol, dl, hr, form {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+blockquote,
+address,
+label,
+table,
+td,
+th,
+ul,
+ol,
+dl,
+hr,
+form {
 	margin: 1em 0 0;
 
 	&:first-child {
@@ -32,20 +50,31 @@ h1, h2, h3, h4, h5, h6, p, pre, blockquote, address, label, table, td, th, ul, o
 	}
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 1em 0 0.5em;
+
 	font-family: var(--fontPrimary);
 	font-style: oblique;
 	font-weight: 900;
-	line-height: 1.2em;
+
+	letter-spacing: 0.01em;
+	line-height: 1.2;
 	-webkit-font-smoothing: auto;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
 	font-style: normal;
 }
 
 h1 {
-	font-size: 3.6rem;
+	font-size: 4.8rem;
 }
 
 h2 {
@@ -85,16 +114,10 @@ hr {
 	border-width: 1px 0 0;
 }
 
-input[type="search"] {
-	box-sizing: border-box;
-
-	appearance: none;
-}
-
 button {
-	display: inline-block;
-	padding: 0;
 	margin: 0;
+	padding: 0;
+	display: inline-block;
 
 	border: 0;
 	outline: 0;
@@ -106,16 +129,18 @@ button {
 	white-space: normal;
 
 	cursor: pointer;
-	transition: color .2s ease;
+	transition: color 0.2s ease;
 	user-select: none;
 }
 
-img, svg {
+img,
+svg {
 	max-width: 100%;
 	height: auto;
 }
 
-ul, ol {
+ul,
+ol {
 	margin: 1em 0;
 	padding-left: 10px;
 
