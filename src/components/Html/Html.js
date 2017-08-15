@@ -10,6 +10,7 @@ const Html = ({ content, state, assets = {}, chunks = {}, icons = {}, dev }) => 
 		head.link.toString(),
 		...(icons && icons.html || []),
 		'<link href="https://fonts.googleapis.com/css?family=Lato:300,900" rel="stylesheet">',
+		'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">',
 		!dev && `<link rel="stylesheet" type="text/css" href=${assets.client.css} />` || ''
 	]
 	const htmlAttrs = head.htmlAttributes.toComponent()

@@ -1,6 +1,6 @@
 .articleSection,
 .shareSection,
-.shareWrapper {
+.commentsSection {
 	max-width: 1440px;
 	margin: 0 auto;
 	padding: 20px;
@@ -12,6 +12,8 @@
 }
 
 .articleSection {
+	padding-top: 60px;
+
 	position: relative;
 
 	article {
@@ -28,10 +30,25 @@
 
 	@media (--tabletUp) {
 		display: flex;
+		margin-top: 0;
 	}
 }
 
 .meta {
+	time {
+		& + time {
+			margin-left: 0.5em;
+		}
+
+		@media (--tabletUp) {
+			display: block;
+
+			& + & {
+				margin-left: 0;
+			}
+		}
+	}
+
 	@media (--tabletUp) {
 		width: 20%;
 		padding-right: 20px;
@@ -43,6 +60,7 @@
 
 	@media (--desktopBig) {
 		width: 40%;
+		padding-right: 40px;
 	}
 }
 
@@ -72,11 +90,9 @@
 	font-size: 3.6rem;
 	font-weight: 900;
 
-	.svg {
+	button {
 		display: inline;
 		position: relative;
-
-		cursor: pointer;
 
 		&:before,
 		&:after {
@@ -117,46 +133,73 @@
 	}
 }
 
-.shareWrapper {
-	display: none;
+.fixedShare,
+.nav .arrow {
+	--sidebar: 0.2;
+	width: calc((100vw - 80px) * var(--sidebar));
+	left: 20px;
 
-	pointer-events: none;
-
-	@media (--tabletUp) {
-		padding: 0 40px;
-		display: block;
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-	}
-}
-
-.relativeShareWrapper {
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-.fixedShare {
-	width: 20%;
 	padding-right: 20px;
-
-	position: absolute;
-	bottom: 20px;
-
 	text-align: right;
 
-	svg {
-		height: 1em;
-
-		& + svg {
-			margin-left: 0.5em;
-		}
+	@media (--tabletUp) {
+		left: 40px;
 	}
 
 	@media (--desktopBig) {
-		width: 40%;
+		--sidebar: 0.4;
+
+		padding-right: 40px;
+	}
+}
+
+.fixedShare {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+
+	white-space: nowrap;
+
+
+	.shareLinks {
+		> * + * {
+			margin-left: 0.5em;
+		}
+
+		svg {
+			height: 1em;
+
+			transition: fill 0.2s ease;
+
+			&:hover {
+				fill: var(--swatchPrimary);
+			}
+		}
+	}
+
+	&.stop {
+		position: absolute;
+		bottom: 64px;
+	}
+
+	@media (--tabletUp) {
+		display: block;
+	}
+}
+
+.nav {
+	width: 100%;
+	height: 60px;
+	position: fixed;
+	z-index: 1;
+
+	background-color: var(--white);
+
+	.arrow {
+		display: inline-block;
+		position: relative;
+		top: 50%;
+
+		transform: translateY(-50%);
 	}
 }

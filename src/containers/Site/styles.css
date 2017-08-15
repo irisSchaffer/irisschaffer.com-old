@@ -82,11 +82,11 @@ h2 {
 }
 
 h3 {
-	font-size: 1.6rem;
+	font-size: 2.8rem;
 }
 
 h4 {
-	font-size: 1.4rem;
+	font-size: 2.4rem;
 }
 
 h5 {
@@ -99,7 +99,7 @@ h6 {
 
 a {
 	color: inherit;
-	text-decoration: underline;
+	text-decoration: none;
 
 	cursor: pointer;
 }

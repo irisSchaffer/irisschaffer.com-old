@@ -1,7 +1,5 @@
 import { Record, List } from 'immutable'
-
-import marked from 'marked'
-import { truncate, stripHtml } from 'utilities/string'
+import { truncate, stripHtml, markdown } from 'utilities/string'
 
 const PostRecord = Record({
 	id          : '',
@@ -15,12 +13,12 @@ const PostRecord = Record({
 export default class Post extends PostRecord {
 	constructor(data = {}) {
 		const preamble = data.preamble || data.body || ''
-		const preambleStripped = stripHtml(marked(preamble))
+		const preambleStripped = stripHtml(markdown(preamble))
 
 		super({
 			...data,
 			preamble : truncate(preambleStripped, 400),
-			body     : data.body && marked(data.body)
+			body     : data.body && markdown(data.body)
 		})
 	}
 

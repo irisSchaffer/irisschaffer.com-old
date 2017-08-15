@@ -8,14 +8,13 @@ import StartPageRecord from 'data/content/StartPage'
 
 import StartPage from 'containers/StartPage'
 import PostPage from 'containers/PostPage'
-import HeaderModule from 'components/Header'
 import FooterModule from 'components/Footer'
 
 import selector from './selectors'
 
 import './styles.css'
 
-const Site = ({ footer, startPage : { title, subtitle, image } }) => (
+const Site = ({ footer }) => (
 	<div>
 		<Helmet
 			defaultTitle="Blog"
@@ -24,12 +23,6 @@ const Site = ({ footer, startPage : { title, subtitle, image } }) => (
 			<meta charSet="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 		</Helmet>
-
-		{/*<HeaderModule
-			title={title}
-			subtitle={subtitle}
-			image={image.props()}
-		/>*/}
 
 		<Switch>
 			<Route path="/" exact component={StartPage} />
@@ -41,8 +34,7 @@ const Site = ({ footer, startPage : { title, subtitle, image } }) => (
 )
 
 Site.propTypes = {
-	footer    : PropTypes.instanceOf(FooterRecord).isRequired,
-	startPage : PropTypes.instanceOf(StartPageRecord).isRequired
+	footer : PropTypes.instanceOf(FooterRecord).isRequired,
 }
 
 export default connect(selector)(Site)

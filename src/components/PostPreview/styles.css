@@ -26,8 +26,8 @@
 			color: #585858;
 		}
 
-		& .arrow > * > *:before {
-			width: 53px;
+		& .arrow > span > span:nth-child(2) {
+			width: 100%;
 		}
 	}
 

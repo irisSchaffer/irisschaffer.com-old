@@ -1,3 +1,6 @@
+import marked from 'marked'
+import highlighter from 'highlight.js'
+
 export const splitText = (str) => str.split('').map(c => c.replace(' ', '&nbsp;'))
 
 export function	truncate(str, maxLength = 120, useWordBoundary = true) {
@@ -18,4 +21,11 @@ export const stripHtml = (html) => {
 	tmp.innerHTML = html
 
 	return tmp.textContent || tmp.innerText || ''
+}
+
+
+export const markdown = (markdownString) => {
+	const highlight = (code) => highlighter.highlightAuto(code).value
+
+	return marked(markdownString, { highlight })
 }

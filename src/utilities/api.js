@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const content = axios.create({
-	baseURL : 'http://localhost:3000/api/',
+	baseURL : `http://localhost:${process.env.PORT}/api/`,
 	timeout : 10000
 })
 
