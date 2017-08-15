@@ -52,11 +52,14 @@
 		}
 	}
 
+	pre,
+	code {
+		background-color: #f7f7f7;
+	}
+
 	pre {
 		padding: 10px;
 		overflow: auto;
-
-		background-color: #f1f1f1;
 
 		code {
 			padding: 0;
@@ -68,8 +71,6 @@
 
 		letter-spacing: 0;
 		font-size: 0.85em;
-
-		background-color: #f1f1f1;
 
 		a {
 			background: none;

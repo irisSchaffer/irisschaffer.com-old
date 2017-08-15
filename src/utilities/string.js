@@ -25,7 +25,17 @@ export const stripHtml = (html) => {
 
 
 export const markdown = (markdownString) => {
-	const highlight = (code) => highlighter.highlightAuto(code).value
+	const highlight = (code, language) => {
+		if (language) {
+			try {
+				return highlighter.highlight(language, code).value
+			} catch (error) {
+				// language not found
+			}
+		}
+
+		return highlighter.highlightAuto(code).value
+	}
 
 	return marked(markdownString, { highlight })
 }

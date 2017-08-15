@@ -63,7 +63,6 @@ class PostPage extends PureComponent {
 	}
 
 	render() {
-		console.log('location', this.props.location, process.env.HOST + this.props.location.pathname)
 		const { id, title, body, publishedAt, slugs } = this.props.post
 		const shareProps = {
 			pathname : slugs[0],
