@@ -22,9 +22,7 @@
 	}
 
 	&:hover {
-		a {
-			color: #585858;
-		}
+		color: #585858;
 
 		& .arrow > span > span:nth-child(2) {
 			width: 100%;
@@ -46,6 +44,7 @@
 .title {
 	@media (--tabletUp) {
 		width: 40%;
+		padding-right: 20px;
 	}
 }
 

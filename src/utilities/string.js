@@ -12,18 +12,6 @@ export function	truncate(str, maxLength = 120, useWordBoundary = true) {
 	return isTooLong ? `${newStr}...` : newStr
 }
 
-export const stripHtml = (html) => {
-	if (!process.browser) {
-		return html
-	}
-	const tmp = document.createElement('div')
-
-	tmp.innerHTML = html
-
-	return tmp.textContent || tmp.innerText || ''
-}
-
-
 export const markdown = (markdownString) => {
 	const highlight = (code, language) => {
 		if (language) {

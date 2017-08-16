@@ -14,6 +14,13 @@ export function* fetchContent() {
 					title
 					subtitle
 					image
+					metaTitle
+					metaDescription
+					metaImage
+					githubLink
+					twitterLink
+					facebookLink
+					linkedinLink
 					shownPosts
 					selected {
 						post {
@@ -37,16 +44,34 @@ export function* fetchContent() {
 		}
 	})
 
-	const { startPage, post, footer } = response.data
+	const { post, footer } = response.data
+	const startPage = response.data.startPage[0]
+
 	return {
 		startPage : {
-			...startPage[0],
-			selected : startPage[0].selected.map((s) => s.post.id)
+			...startPage,
+			selected    : startPage.selected.map((s) => s.post.id),
+			meta        : getMeta(startPage),
+			socialLinks : {
+				github   : startPage.githubLink,
+				twitter  : startPage.twitterLink,
+				facebook : startPage.facebookLink,
+				linkedin : startPage.linkedinLink
+			}
 		},
 		footer : footer[0],
-		posts  : post
+		posts  : post.map(p => ({
+			...p,
+			meta : getMeta(p)
+		}))
 	}
 }
+
+const getMeta = obj => ({
+	title       : obj.metaTitle,
+	description : obj.metaDescription,
+	image       : obj.metaImage
+})
 
 export default function* contentSaga() {
 	let content = yield select(contentSelector)

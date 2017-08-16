@@ -9,6 +9,7 @@ import Post from 'data/content/Post'
 import DisqusThread from 'containers/DisqusThread'
 import { FacebookShare, TwitterShare } from 'containers/SocialShare'
 import Content from 'components/Content'
+import MetaHelmet from 'components/MetaHelmet'
 import Arrow from 'components/Arrow'
 
 import selector from './selectors'
@@ -75,7 +76,7 @@ class PostPage extends PureComponent {
 	}
 
 	render() {
-		const { id, title, body, publishedAt, slugs } = this.props.post
+		const { id, title, body, publishedAt, slugs, meta } = this.props.post
 		const shareProps = {
 			pathname : slugs[0],
 			title
@@ -83,6 +84,7 @@ class PostPage extends PureComponent {
 
 		return (
 			<main className={styles.root}>
+				<MetaHelmet meta={meta} />
 				<nav className={styles.nav}>
 					<button className={styles.arrow} onClick={this.onBack}>
 						<Arrow direction="left" />

@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import { List } from 'immutable'
 
 import { addReducer, removeReducer } from 'utilities/reducers'
-import HeaderModule from 'components/Header'
 import StartPage from 'data/content/StartPage'
+import HeaderModule from 'components/Header'
 import Button from 'components/Button'
 import PostPreview from 'components/PostPreview'
+import MetaHelmet from 'components/MetaHelmet'
 
 import { NAME } from './constants'
 import reducer from './reducer'
@@ -22,7 +22,6 @@ class Startpage extends PureComponent {
 		startPage    : PropTypes.instanceOf(StartPage).isRequired,
 		posts        : PropTypes.instanceOf(List).isRequired,
 		hasMorePosts : PropTypes.bool.isRequired,
-		history      : PropTypes.object.isRequired,
 		dispatch     : PropTypes.func.isRequired
 	}
 
@@ -39,14 +38,15 @@ class Startpage extends PureComponent {
 	}
 
 	render() {
-		const { title, subtitle, image } = this.props.startPage
+		const { title, subtitle, image, meta } = this.props.startPage
 
 		return (
 			<div>
+				<MetaHelmet meta={meta} />
 				<HeaderModule
 					title={title}
 					subtitle={subtitle}
-					image={image.props()}
+					image={image}
 				/>
 				<main className={styles.posts}>
 					{this.props.posts.toJS().map(post => (
@@ -68,4 +68,4 @@ class Startpage extends PureComponent {
 	}
 }
 
-export default withRouter(connect(selector)(Startpage))
+export default connect(selector)(Startpage)

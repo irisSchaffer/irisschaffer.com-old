@@ -1,9 +1,12 @@
 import { Record, List } from 'immutable'
-import { truncate, stripHtml, markdown } from 'utilities/string'
+import striptags from 'striptags'
+import { truncate, markdown } from 'utilities/string'
+import Meta from './Meta'
 
 const PostRecord = Record({
 	id          : '',
 	title       : '',
+	meta        : new Meta(),
 	slugs       : new List(),
 	publishedAt : null,
 	preamble    : '',
@@ -11,15 +14,24 @@ const PostRecord = Record({
 }, 'post')
 
 export default class Post extends PostRecord {
-	constructor(data = {}) {
+	constructor(data = { meta : {} }, name) {
 		const preamble = data.preamble || data.body || ''
-		const preambleStripped = stripHtml(markdown(preamble))
+		const preambleStripped = truncate(striptags(markdown(preamble)), 400)
 
-		super({
-			...data,
-			preamble : truncate(preambleStripped, 400),
-			body     : data.body && markdown(data.body)
-		})
+		const initData = data instanceof Post
+			? data
+			: {
+				...data,
+				preamble : preambleStripped,
+				body     : data.body && markdown(data.body),
+				meta     : new Meta({
+					...(data.meta || {}),
+					title       : data.meta.title || data.title,
+					description : data.meta.description || preambleStripped,
+				})
+			}
+
+		super(initData, name)
 	}
 
 	publishedAtDate() {

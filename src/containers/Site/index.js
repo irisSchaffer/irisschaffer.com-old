@@ -14,11 +14,11 @@ import selector from './selectors'
 
 import './styles.css'
 
-const Site = ({ footer }) => (
+const Site = ({ footer, startPage }) => (
 	<div>
 		<Helmet
-			defaultTitle="Blog"
-			titleTemplate="%s | Blog"
+			defaultTitle={startPage.meta.title}
+			titleTemplate={`%s | ${startPage.meta.title}`}
 		>
 			<meta charSet="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,7 +34,8 @@ const Site = ({ footer }) => (
 )
 
 Site.propTypes = {
-	footer : PropTypes.instanceOf(FooterRecord).isRequired,
+	footer    : PropTypes.instanceOf(FooterRecord).isRequired,
+	startPage : PropTypes.instanceOf(StartPageRecord).isRequired
 }
 
 export default connect(selector)(Site)

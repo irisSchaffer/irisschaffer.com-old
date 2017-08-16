@@ -1,7 +1,8 @@
 import { createStructuredSelector } from 'reselect'
 
-import { footerSelector } from 'data/content/selectors'
+import { footerSelector, startPageSelector } from 'data/content/selectors'
 
 export default createStructuredSelector({
-	footer : footerSelector
+	footer    : footerSelector,
+	startPage : startPageSelector
 })
