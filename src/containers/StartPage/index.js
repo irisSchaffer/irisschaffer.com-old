@@ -34,10 +34,6 @@ class Startpage extends PureComponent {
 		removeReducer(NAME)
 	}
 
-	link = (post) => () => {
-		this.props.history.push(post.slugs[0])
-	}
-
 	loadMore = () => {
 		this.props.dispatch(loadMore(this.props.startPage.shownPosts))
 	}
@@ -56,7 +52,6 @@ class Startpage extends PureComponent {
 					{this.props.posts.toJS().map(post => (
 						<PostPreview
 							key={post.id}
-							onClick={this.link(post)}
 							{...post}
 						/>
 					))}

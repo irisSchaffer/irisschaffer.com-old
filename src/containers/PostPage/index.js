@@ -10,7 +10,6 @@ import DisqusThread from 'containers/DisqusThread'
 import { FacebookShare, TwitterShare } from 'containers/SocialShare'
 import Content from 'components/Content'
 import Arrow from 'components/Arrow'
-import Link from 'components/Link'
 
 import selector from './selectors'
 
@@ -18,8 +17,9 @@ import styles from './styles.css'
 
 class PostPage extends PureComponent {
 	static propTypes = {
-		post     : PropTypes.instanceOf(Post),
-		location : PropTypes.object.isRequired
+		location : PropTypes.object.isRequired,
+		history  : PropTypes.object.isRequired,
+		post     : PropTypes.instanceOf(Post)
 	}
 
 	static defaultProps = {
@@ -40,12 +40,16 @@ class PostPage extends PureComponent {
 	}
 
 	componentDidMount() {
+		window.scrollTo(0, 0)
+
 		window.addEventListener('scroll', this.onScroll)
 		this.onScroll()
 	}
 
-	componentWillUnmount() {
-		window.removeEventListener('scroll', this.onScroll)
+	componentWillReceiveProps({ location }) {
+		if (process.browser && location.pathname !== this.props.location.pathname) {
+			window.scrollTo(0, 0)
+		}
 	}
 
 	onScroll = () => {
@@ -62,6 +66,14 @@ class PostPage extends PureComponent {
 		})
 	}
 
+	onBack = () => {
+		if (document.referrer.length === 0 || document.referrer.includes(process.env.HOST)) {
+			this.props.history.goBack()
+		} else {
+			this.props.history.push('/')
+		}
+	}
+
 	render() {
 		const { id, title, body, publishedAt, slugs } = this.props.post
 		const shareProps = {
@@ -72,9 +84,9 @@ class PostPage extends PureComponent {
 		return (
 			<main className={styles.root}>
 				<nav className={styles.nav}>
-					<Link className={styles.arrow} href="/">
+					<button className={styles.arrow} onClick={this.onBack}>
 						<Arrow direction="left" />
-					</Link>
+					</button>
 				</nav>
 				<section className={styles.articleSection}>
 					<aside className={styles.meta}>

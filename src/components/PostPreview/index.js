@@ -7,19 +7,19 @@ import Link from 'components/Link'
 
 import styles from './styles.css'
 
-const Footer = ({ className, title, preamble, slugs, onClick }) => (
+const Footer = ({ className, title, preamble, slugs }) => (
 	<article className={classnames(styles.root, className)}>
-		<div className={styles.wrapper} onClick={onClick}>
+		<Link className={styles.wrapper} href={`/${slugs[0]}`}>
 			<header className={styles.title}>
-				<h2><Link href={`/${slugs[0]}`}>{title}</Link></h2>
+				<h2>{title}</h2>
 			</header>
 			<main className={styles.preamble}>
-				<Link href={`/${slugs[0]}`}>{preamble}</Link>
+				{preamble}
 			</main>
 			<div className={styles.arrow}>
 				<Arrow />
 			</div>
-		</div>
+		</Link>
 	</article>
 )
 
@@ -27,8 +27,7 @@ Footer.propTypes = {
 	className : PropTypes.string,
 	title     : PropTypes.string.isRequired,
 	preamble  : PropTypes.string.isRequired,
-	slugs     : PropTypes.array.isRequired,
-	onClick   : PropTypes.func.isRequired
+	slugs     : PropTypes.array.isRequired
 }
 
 Footer.defaultProps = {
