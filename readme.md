@@ -21,7 +21,10 @@ $ cp .env.example .env
 $ yarn develop # will start the development server on port 3000
 ```
 
-Note that setting a different port is currently not supported.
+
+```bash
+$ PORT=4000 yarn develop # will start the development server on port 4000
+```
 
 ## Production
 
