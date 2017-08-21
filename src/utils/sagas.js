@@ -1,7 +1,7 @@
 import { Map } from 'immutable'
 import { END } from 'redux-saga'
 
-import { sagaMiddleware } from 'utilities/middleware'
+import { sagaMiddleware } from 'utils/middleware'
 
 let tasks = new Map()
 

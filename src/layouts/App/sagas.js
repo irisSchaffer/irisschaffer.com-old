@@ -2,7 +2,7 @@ import { delay } from 'redux-saga'
 import { put, call, race } from 'redux-saga/effects'
 import { RequestTimeout } from 'http-errors'
 
-import { addReducer } from 'utilities/reducers'
+import { addReducer } from 'utils/reducers'
 import { contentReducer, contentSaga } from 'data/content'
 
 import { setLoaded, setError } from './actions'

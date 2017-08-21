@@ -3,8 +3,8 @@ import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { addReducer, removeReducer } from 'utilities/reducers'
-import { addSaga, removeSaga } from 'utilities/sagas'
+import { addReducer, removeReducer } from 'utils/reducers'
+import { addSaga, removeSaga } from 'utils/sagas'
 import { Site } from 'layouts'
 import { Error as ErrorModule, Loading } from 'components'
 

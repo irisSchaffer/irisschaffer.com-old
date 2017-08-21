@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { List } from 'immutable'
 
-import { addReducer, removeReducer } from 'utilities/reducers'
+import { addReducer, removeReducer } from 'utils/reducers'
 import { Records } from 'data/content'
 import { Header, Button, PostPreview, MetaHelmet } from 'components'
 

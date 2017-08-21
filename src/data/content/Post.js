@@ -1,6 +1,6 @@
 import { Record, List } from 'immutable'
 import striptags from 'striptags'
-import { truncate, markdown } from 'utilities/string'
+import { truncate, markdown } from 'utils/string'
 import Meta from './Meta'
 
 const PostRecord = Record({

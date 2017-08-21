@@ -1,6 +1,6 @@
 import { put, call, select } from 'redux-saga/effects'
 
-import api from 'utilities/api'
+import api from 'utils/api'
 
 import { setContent } from './actions'
 import { contentSelector } from './selectors'
