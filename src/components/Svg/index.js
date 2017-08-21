@@ -14,3 +14,5 @@ Svg.propTypes = {
 export default Svg
 export Facebook from './Facebook'
 export Twitter from './Twitter'
+export GitHub from './GitHub'
+export Linkedin from './Linkedin'

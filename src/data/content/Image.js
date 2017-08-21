@@ -1,6 +1,6 @@
 import { Record } from 'immutable'
 
-const Dimensions = Record({
+export const Dimensions = Record({
 	width  : 0,
 	height : 0
 }, 'dimensions')

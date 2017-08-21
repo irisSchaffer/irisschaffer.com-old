@@ -35,7 +35,7 @@ class Startpage extends PureComponent {
 	}
 
 	render() {
-		const { title, subtitle, image, meta } = this.props.startPage
+		const { title, subtitle, image, meta, socialLinks } = this.props.startPage
 
 		return (
 			<div>
@@ -44,6 +44,7 @@ class Startpage extends PureComponent {
 					title={title}
 					subtitle={subtitle}
 					image={image}
+					socialLinks={socialLinks}
 				/>
 				<main className={styles.posts}>
 					{this.props.posts.toJS().map(post => (

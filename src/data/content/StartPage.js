@@ -2,7 +2,7 @@ import { Record, Set } from 'immutable'
 import Image from './Image'
 import Meta from './Meta'
 
-const SocialLinks = Record({
+export const SocialLinks = Record({
 	github   : '',
 	twitter  : '',
 	facebook : '',
