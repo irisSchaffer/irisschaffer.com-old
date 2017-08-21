@@ -13,9 +13,10 @@ const Footer = ({ className, title, preamble, slugs }) => (
 			<header className={styles.title}>
 				<h2>{title}</h2>
 			</header>
-			<main className={styles.preamble}>
-				{preamble}
-			</main>
+			<main
+				className={styles.preamble}
+				dangerouslySetInnerHTML={{ __html : preamble }}
+			/>
 			<div className={styles.arrow}>
 				<Arrow />
 			</div>

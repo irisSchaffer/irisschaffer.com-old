@@ -12,5 +12,5 @@ Svg.propTypes = {
 }
 
 export default Svg
-export SvgFacebook from './SvgFacebook'
-export SvgTwitter from './SvgTwitter'
+export Facebook from './Facebook'
+export Twitter from './Twitter'

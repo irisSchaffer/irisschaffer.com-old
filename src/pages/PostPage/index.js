@@ -5,12 +5,10 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import classnames from 'classnames'
 
-import Post from 'data/content/Post'
-import DisqusThread from 'containers/DisqusThread'
+import { Records } from 'data/content'
+import { DisqusThread } from 'containers'
 import { FacebookShare, TwitterShare } from 'containers/SocialShare'
-import Content from 'components/Content'
-import MetaHelmet from 'components/MetaHelmet'
-import Arrow from 'components/Arrow'
+import { Content, MetaHelmet, Arrow } from 'components'
 
 import selector from './selectors'
 
@@ -20,11 +18,11 @@ class PostPage extends PureComponent {
 	static propTypes = {
 		location : PropTypes.object.isRequired,
 		history  : PropTypes.object.isRequired,
-		post     : PropTypes.instanceOf(Post)
+		post     : PropTypes.instanceOf(Records.Post)
 	}
 
 	static defaultProps = {
-		post : new Post()
+		post : new Records.Post()
 	}
 
 	constructor(props) {

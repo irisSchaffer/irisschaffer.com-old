@@ -6,8 +6,7 @@ import { Switch, Route } from 'react-router-dom'
 import FooterRecord from 'data/content/Footer'
 import StartPageRecord from 'data/content/StartPage'
 
-import StartPage from 'containers/StartPage'
-import PostPage from 'containers/PostPage'
+import { StartPage, PostPage } from 'pages'
 import FooterModule from 'components/Footer'
 
 import selector from './selectors'

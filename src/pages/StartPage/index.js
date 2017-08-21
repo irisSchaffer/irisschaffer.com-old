@@ -4,11 +4,8 @@ import { connect } from 'react-redux'
 import { List } from 'immutable'
 
 import { addReducer, removeReducer } from 'utilities/reducers'
-import StartPage from 'data/content/StartPage'
-import HeaderModule from 'components/Header'
-import Button from 'components/Button'
-import PostPreview from 'components/PostPreview'
-import MetaHelmet from 'components/MetaHelmet'
+import { Records } from 'data/content'
+import { Header, Button, PostPreview, MetaHelmet } from 'components'
 
 import { NAME } from './constants'
 import reducer from './reducer'
@@ -19,7 +16,7 @@ import styles from './styles.css'
 
 class Startpage extends PureComponent {
 	static propTypes = {
-		startPage    : PropTypes.instanceOf(StartPage).isRequired,
+		startPage    : PropTypes.instanceOf(Records.StartPage).isRequired,
 		posts        : PropTypes.instanceOf(List).isRequired,
 		hasMorePosts : PropTypes.bool.isRequired,
 		dispatch     : PropTypes.func.isRequired
@@ -43,7 +40,7 @@ class Startpage extends PureComponent {
 		return (
 			<div>
 				<MetaHelmet meta={meta} />
-				<HeaderModule
+				<Header
 					title={title}
 					subtitle={subtitle}
 					image={image}

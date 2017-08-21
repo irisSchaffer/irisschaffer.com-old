@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { SvgFacebook } from 'components/Svg'
+import { Svg } from 'components'
 import SocialShare from './'
 
 class FacebookShare extends PureComponent {
@@ -17,7 +17,7 @@ class FacebookShare extends PureComponent {
 
 		return (
 			<SocialShare url={url} {...props}>
-				<SvgFacebook />
+				<Svg.Facebook />
 			</SocialShare>
 		)
 	}

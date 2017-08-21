@@ -5,9 +5,8 @@ import PropTypes from 'prop-types'
 
 import { addReducer, removeReducer } from 'utilities/reducers'
 import { addSaga, removeSaga } from 'utilities/sagas'
-import ErrorMessage from 'components/Error'
-import Loading from 'components/Loading'
-import Site from 'containers/Site'
+import { Site } from 'layouts'
+import { Error as ErrorModule, Loading } from 'components'
 
 import { NAME } from './constants'
 import selector from './selectors'
@@ -38,7 +37,7 @@ class App extends PureComponent {
 		const { loaded, error } = this.props
 
 		if (error) {
-			return <ErrorMessage {...error} />
+			return <ErrorModule {...error} />
 		}
 
 		if (!loaded) {
