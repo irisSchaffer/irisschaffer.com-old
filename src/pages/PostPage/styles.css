@@ -136,7 +136,7 @@
 .fixedShare,
 .nav .arrow {
 	--sidebar: 0.2;
-	width: calc((100vw - 80px) * var(--sidebar));
+	width: calc((100% - 80px) * var(--sidebar));
 	left: 20px;
 
 	padding-right: 20px;

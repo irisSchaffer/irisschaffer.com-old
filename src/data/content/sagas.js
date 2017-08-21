@@ -33,6 +33,9 @@ export function* fetchContent() {
 					slugs
 					publishedAt
 					title
+					metaTitle
+					metaDescription
+					metaImage
 					preamble
 					body
 				}
