@@ -1,0 +1,25 @@
+.root {
+	> * + * {
+		margin-left: 0.8em;
+	}
+
+	> * {
+		transition: opacity 0.2s ease;
+
+		&:hover {
+			opacity: 0.5;
+
+			svg {
+				transform: scale(1.1);
+			}
+		}
+	}
+
+	svg {
+		max-width: 1.3em;
+		height: 1.3em;
+
+		transform: scale(1.000001);
+		transition: transform 0.2s ease;
+	}
+}

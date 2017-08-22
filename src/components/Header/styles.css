@@ -33,13 +33,4 @@
 
 .socialLinks {
 	margin-top: 1em;
-
-	> * + * {
-		margin-left: 0.8em;
-	}
-
-	svg {
-		max-width: 1.3em;
-		height: 1.3em;
-	}
 }

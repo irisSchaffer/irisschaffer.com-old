@@ -120,6 +120,7 @@
 		}
 
 		svg {
+			max-width: 0.8em;
 			height: 0.8em;
 			margin-left: 0.3em;
 
@@ -166,13 +167,21 @@
 			margin-left: 0.5em;
 		}
 
-		svg {
-			height: 1em;
+		button {
+			svg {
+				max-width: 1.1em;
+				height: 1em;
 
-			transition: fill 0.2s ease;
+				opacity: 1;
+				transform: scale(1.00001);
 
-			&:hover {
-				fill: var(--swatchPrimary);
+				transition: opacity, transform 0.2s ease;
+
+			}
+
+			&:hover svg {
+				opacity: 0.5;
+				transform: scale(1.1);
 			}
 		}
 	}

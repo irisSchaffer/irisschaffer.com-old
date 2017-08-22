@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { Records } from 'data/content'
 
-import { Link, Svg } from 'components'
+import { Link, SocialLinks } from 'components'
 
 import styles from './styles.css'
 
@@ -14,28 +14,7 @@ const Header = ({ className, title, subtitle, image, socialLinks }) => (
 		</Link>
 		<h1>{title}</h1>
 		<h2>{subtitle}</h2>
-		<div className={styles.socialLinks}>
-			{socialLinks.github && (
-				<Link href={socialLinks.github} target="_blank">
-					<Svg.GitHub />
-				</Link>
-			)}
-			{socialLinks.twitter && (
-				<Link href={socialLinks.twitter} target="_blank">
-					<Svg.Twitter />
-				</Link>
-			)}
-			{socialLinks.facebook && (
-				<Link href={socialLinks.facebook} target="_blank">
-					<Svg.Facebook />
-				</Link>
-			)}
-			{socialLinks.linkedin && (
-				<Link href={socialLinks.linkedin} target="_blank">
-					<Svg.Linkedin />
-				</Link>
-			)}
-		</div>
+		<SocialLinks className={styles.socialLinks} socialLinks={socialLinks} />
 	</header>
 )
 

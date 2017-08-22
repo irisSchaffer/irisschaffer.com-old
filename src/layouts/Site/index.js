@@ -28,7 +28,9 @@ const Site = ({ footer, startPage }) => (
 			<Route path="/:slug" component={PostPage} />
 		</Switch>
 
-		<FooterModule>{footer.text}</FooterModule>
+		<FooterModule socialLinks={startPage.socialLinks}>
+			{footer.text}
+		</FooterModule>
 	</div>
 )
 
