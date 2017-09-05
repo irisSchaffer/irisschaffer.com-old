@@ -4,7 +4,7 @@ const express = require('express')
 const prismic = require('./server/prismic')
 
 const isDev = process.env.NODE_ENV !== 'production'
-const port = process.env.PORT || 3000
+const port = process.env.APP_PORT || 3000
 
 const app = express()
 

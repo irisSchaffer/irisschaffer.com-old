@@ -1,0 +1,6 @@
+app:
+  volumes:
+    - /usr/src/app/node_modules
+    - /usr/src/app/build
+  environment:
+    NODE_ENV: production
