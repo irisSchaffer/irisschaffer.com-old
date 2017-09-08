@@ -13,6 +13,6 @@ prismic(app, '/api', '1 day')
 // eslint-disable-next-line global-require
 const server = isDev && require('./server/develop') || require('./server/production')
 
-server(app).listen(port, () => {
+server(app).listen(port, '0.0.0.0', () => {
 	console.info(`Listening on port ${port}!`)
 })
