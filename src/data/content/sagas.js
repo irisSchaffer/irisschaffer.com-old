@@ -33,6 +33,7 @@ export function* fetchContent() {
 					slugs
 					publishedAt
 					title
+					tags
 					metaTitle
 					metaDescription
 					metaImage

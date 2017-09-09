@@ -47,10 +47,10 @@ class Startpage extends PureComponent {
 					socialLinks={socialLinks}
 				/>
 				<main className={styles.posts}>
-					{this.props.posts.toJS().map(post => (
+					{this.props.posts.toArray().map(post => (
 						<PostPreview
 							key={post.id}
-							{...post}
+							post={post}
 						/>
 					))}
 					{this.props.hasMorePosts && (

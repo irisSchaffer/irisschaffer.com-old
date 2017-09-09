@@ -1,4 +1,4 @@
-import { Record, List } from 'immutable'
+import { Record, List, Set } from 'immutable'
 import striptags from 'striptags'
 import { truncate, markdown } from 'utils/string'
 import Meta from './Meta'
@@ -10,7 +10,8 @@ const PostRecord = Record({
 	slugs       : new List(),
 	publishedAt : null,
 	preamble    : '',
-	body        : ''
+	body        : '',
+	tags        : new Set()
 }, 'post')
 
 export default class Post extends PostRecord {
@@ -28,7 +29,8 @@ export default class Post extends PostRecord {
 					...(data.meta || {}),
 					title       : data.meta.title || data.title,
 					description : data.meta.description || preambleStripped,
-				})
+				}),
+				tags : new Set(data.tags || [])
 			}
 
 		super(initData, name)
