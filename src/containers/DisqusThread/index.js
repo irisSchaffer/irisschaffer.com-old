@@ -1,21 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function renderDisqus() {
-	if (!process.browser) {
-		return
-	}
-
-	if (window.DISQUS === undefined) {
-		const script = document.createElement('script')
-		script.async = true
-		script.src = `https://${process.env.DISQUS_SHORTNAME}.disqus.com/embed.js`
-		document.getElementsByTagName('head')[0].appendChild(script)
-	} else {
-		window.DISQUS.reset({ reload : true })
-	}
-}
-
 class DisqusThread extends React.Component {
 	static propTypes = {
 		className : PropTypes.string,
@@ -29,7 +14,7 @@ class DisqusThread extends React.Component {
 	}
 
 	componentDidMount() {
-		renderDisqus()
+		this.renderDisqus()
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -39,17 +24,34 @@ class DisqusThread extends React.Component {
 	}
 
 	componentDidUpdate() {
-		renderDisqus()
+		this.renderDisqus()
+	}
+
+	renderDisqus() {
+		if (!process.browser) {
+			return
+		}
+
+		if (window.DISQUS === undefined) {
+			const script = document.createElement('script')
+			script.async = true
+			script.src = `https://${process.env.DISQUS_SHORTNAME}.disqus.com/embed.js`
+			script.setAttribute('data-timestamp', +new Date())
+			document.getElementsByTagName('head')[0].appendChild(script)
+		} else {
+			window.DISQUS.reset({ reload : true })
+		}
 	}
 
 	render() {
 		const { id, title, slug, ...props } = this.props
 
 		if (process.browser) {
-			window.disqus_shortname = process.env.DISQUS_SHORTNAME
-			window.disqus_identifier = id
-			window.disqus_title = title
-			window.disqus_url = process.env.DISQUS_WEBSITE_URL + slug
+			window.disqus_config = function() {
+				this.page.url = `${process.env.HOST}/${slug}`
+				this.page.identifier = id
+				this.page.title = title
+			}
 		}
 
 		return <section {...props} id="disqus_thread" />

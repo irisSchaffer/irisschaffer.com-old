@@ -36,3 +36,12 @@ $ PORT=4000 npm run develop # will start the development server on port 4000
 $ npm run build
 $ npm start
 ```
+
+## Deploy
+
+We use [zeit's now](https://zeit.co/) for deployment.
+
+```bash
+$ npm run deploy
+$ now alias [latest-deploy] irisschaffer.com
+```
