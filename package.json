@@ -1,15 +1,17 @@
 {
   "private": true,
   "engines": {
-    "node": "~5.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "build:client": "webpack -p --env=prod --config ./lib/config/webpack/client.js",
     "build:render": "NODE_ENV=production npm run build:client && NODE_ENV=production webpack -p --env=prod --config ./lib/config/webpack/render.js",
     "build:static": "npm run build:render && webpack -p --env=prod --config ./lib/config/webpack/static.js",
+    "build": "npm run build:render",
     "develop": "docker-compose up",
     "production": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
     "start": "node ./start.js",
+    "deploy": "now --npm --public --dotenv --e NODE_ENV=production",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
