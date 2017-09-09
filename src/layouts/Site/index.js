@@ -6,7 +6,7 @@ import { Switch, Route } from 'react-router-dom'
 import FooterRecord from 'data/content/Footer'
 import StartPageRecord from 'data/content/StartPage'
 
-import { StartPage, PostPage } from 'pages'
+import { StartPage, PostPage, TagPage } from 'pages'
 import FooterModule from 'components/Footer'
 
 import selector from './selectors'
@@ -25,7 +25,7 @@ const Site = ({ footer, startPage }) => (
 
 		<Switch>
 			<Route path="/" exact component={StartPage} />
-			<Route path="/tags/:tag" exact component={StartPage} />
+			<Route path="/tags/:tag" exact component={TagPage} />
 			<Route path="/:slug" component={PostPage} />
 		</Switch>
 

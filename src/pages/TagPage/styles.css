@@ -10,3 +10,7 @@
 		margin: 0 auto;
 	}
 }
+
+.header svg {
+	height: 1em;
+}

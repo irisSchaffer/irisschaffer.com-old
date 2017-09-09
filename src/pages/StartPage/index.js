@@ -2,11 +2,10 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { List } from 'immutable'
 
-import { addReducer, removeReducer } from 'utils/reducers'
 import { Records } from 'data/content'
-import { Header, Button, PostPreview, MetaHelmet } from 'components'
+import { PostListing } from 'containers'
+import { Header, MetaHelmet } from 'components'
 
 import selector from './selectors'
 
@@ -14,30 +13,18 @@ import styles from './styles.css'
 
 class Startpage extends PureComponent {
 	static propTypes = {
-		loadMoreModule : PropTypes.object.isRequired,
-		startPage      : PropTypes.instanceOf(Records.StartPage).isRequired,
-		posts          : PropTypes.instanceOf(List).isRequired,
-		hasMorePosts   : PropTypes.bool.isRequired,
-		dispatch       : PropTypes.func.isRequired
-	}
-
-	componentWillMount() {
-		const { loadMoreModule } = this.props
-		addReducer(loadMoreModule.constants.NAME, loadMoreModule.reducer)
-	}
-
-	componentWillUnmount() {
-		removeReducer(this.props.loadMoreModule.constants.NAME)
-	}
-
-	loadMore = () => {
-		this.props.dispatch(this.props.loadMoreModule.actions.loadMore(
-			this.props.startPage.shownPosts
-		))
+		startPage : PropTypes.instanceOf(Records.StartPage).isRequired
 	}
 
 	render() {
-		const { title, subtitle, image, meta, socialLinks } = this.props.startPage
+		const {
+			title,
+			subtitle,
+			image,
+			meta,
+			socialLinks,
+			shownPosts
+		} = this.props.startPage
 
 		return (
 			<div>
@@ -48,20 +35,11 @@ class Startpage extends PureComponent {
 					image={image}
 					socialLinks={socialLinks}
 				/>
-				<main className={styles.posts}>
-					{this.props.posts.toArray().map(post => (
-						<PostPreview
-							key={post.id}
-							post={post}
-						/>
-					))}
-					{this.props.hasMorePosts && (
-						<section className={styles.loadMoreSection}>
-							<Button onClick={this.loadMore} size="large">
-								<h2>Load More</h2>
-							</Button>
-						</section>
-					)}
+				<main>
+					<PostListing
+						shownPosts={shownPosts}
+						className={styles.posts}
+					/>
 				</main>
 			</div>
 		)
