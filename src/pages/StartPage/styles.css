@@ -4,6 +4,11 @@
 	> *:nth-child(even) {
 		background-color: var(--lightGray);
 	}
+
+	article > * {
+		max-width: 1440px;
+		margin: 0 auto;
+	}
 }
 
 .loadMoreSection {

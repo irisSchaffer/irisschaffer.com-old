@@ -18,8 +18,8 @@
 
 	article {
 		@media (--tabletUp) {
-			max-width: 600px;
 			width: 80%;
+			max-width: 600px;
 		}
 
 		@media (--desktopBig) {

@@ -14,11 +14,7 @@ const Tags = ({ tags, className }) => {
 	return (
 		<div className={classnames(styles.root, className)}>
 			<Svg.Tag />
-			{/*tags.toArray().map(tag => [
-				<Link href={`/tags/${tag}`} key={tag}>{tag}</Link>,
-				<span> </span>
-			])*/}
-			{['blub', 'test', 'research-blog'].map(tag => [
+			{tags.toArray().map(tag => [
 				<Link href={`/tags/${tag}`} key={tag}>{tag}</Link>,
 				<span> </span>
 			])}

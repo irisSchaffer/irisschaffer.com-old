@@ -19,18 +19,19 @@ export default class Post extends PostRecord {
 		if (data instanceof Post) {
 			super(data, name)
 		} else {
-			const preamble = data.preamble
-				|| (data.body && truncate(striptags(markdown(data.body)), 400))
-				|| ''
+			const preamble = data.preamble || data.body || ''
+			const preambleStripped = preamble.length <= 400
+				&& preamble
+				|| truncate(striptags(markdown(preamble)), 400)
 
 			super({
 				...data,
-				preamble,
-				body : data.body && markdown(data.body),
-				meta : new Meta({
+				preamble : preambleStripped,
+				body     : data.body && markdown(data.body),
+				meta     : new Meta({
 					...(data.meta || {}),
 					title       : data.meta.title || data.title,
-					description : data.meta.description || preamble,
+					description : data.meta.description || preambleStripped,
 				}),
 				tags : new Set(data.tags || [])
 			}, name)
