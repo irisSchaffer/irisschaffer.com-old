@@ -5,11 +5,11 @@ export const splitText = (str) => str.split('').map(c => c.replace(' ', '&nbsp;'
 
 export function	truncate(str, maxLength = 120, useWordBoundary = true) {
 	const isTooLong = str.length > maxLength
-	let newStr = isTooLong ? str.substr(0, maxLength) : str
+	let newStr = isTooLong ? str.substr(0, maxLength - 3) : str
 
 	newStr = (useWordBoundary && isTooLong) ? newStr.substr(0, newStr.lastIndexOf(' ')) : newStr
 
-	return isTooLong ? String.raw`${newStr}...` : newStr
+	return isTooLong ? `${newStr}...` : newStr
 }
 
 export const markdown = (markdownString) => {
