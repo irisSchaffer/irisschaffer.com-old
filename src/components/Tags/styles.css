@@ -1,0 +1,10 @@
+.root {
+	svg {
+		height: 1em;
+		margin-right: 0.5em;
+	}
+
+	a {
+		text-decoration: underline;
+	}
+}

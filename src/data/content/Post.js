@@ -16,24 +16,25 @@ const PostRecord = Record({
 
 export default class Post extends PostRecord {
 	constructor(data = { meta : {} }, name) {
-		const preamble = data.preamble || data.body || ''
-		const preambleStripped = truncate(striptags(markdown(preamble)), 400)
+		if (data instanceof Post) {
+			super(data, name)
+		} else {
+			const preamble = data.preamble
+				|| (data.body && truncate(striptags(markdown(data.body)), 400))
+				|| ''
 
-		const initData = data instanceof Post
-			? data
-			: {
+			super({
 				...data,
-				preamble : preambleStripped,
-				body     : data.body && markdown(data.body),
-				meta     : new Meta({
+				preamble,
+				body : data.body && markdown(data.body),
+				meta : new Meta({
 					...(data.meta || {}),
 					title       : data.meta.title || data.title,
-					description : data.meta.description || preambleStripped,
+					description : data.meta.description || preamble,
 				}),
 				tags : new Set(data.tags || [])
-			}
-
-		super(initData, name)
+			}, name)
+		}
 	}
 
 	publishedAtDate() {

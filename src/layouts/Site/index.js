@@ -25,6 +25,7 @@ const Site = ({ footer, startPage }) => (
 
 		<Switch>
 			<Route path="/" exact component={StartPage} />
+			<Route path="/tags/:tag" exact component={StartPage} />
 			<Route path="/:slug" component={PostPage} />
 		</Switch>
 

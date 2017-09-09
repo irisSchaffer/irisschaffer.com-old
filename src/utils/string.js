@@ -9,7 +9,7 @@ export function	truncate(str, maxLength = 120, useWordBoundary = true) {
 
 	newStr = (useWordBoundary && isTooLong) ? newStr.substr(0, newStr.lastIndexOf(' ')) : newStr
 
-	return isTooLong ? `${newStr}...` : newStr
+	return isTooLong ? String.raw`${newStr}...` : newStr
 }
 
 export const markdown = (markdownString) => {

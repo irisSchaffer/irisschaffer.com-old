@@ -10,6 +10,10 @@
 	padding: 20px 0;
 	text-align: center;
 
+	h2 {
+		margin: 0;
+	}
+
 	@media (--tabletUp) {
 		padding: 40px 0;
 	}

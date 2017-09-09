@@ -8,7 +8,7 @@ import classnames from 'classnames'
 import { Records } from 'data/content'
 import { DisqusThread } from 'containers'
 import { FacebookShare, TwitterShare } from 'containers/SocialShare'
-import { Content, MetaHelmet, Arrow } from 'components'
+import { Content, MetaHelmet, Arrow, Tags } from 'components'
 
 import selector from './selectors'
 
@@ -74,7 +74,7 @@ class PostPage extends PureComponent {
 	}
 
 	render() {
-		const { id, title, body, publishedAt, slugs, meta } = this.props.post
+		const { id, title, body, publishedAt, slugs, meta, tags } = this.props.post
 		const shareProps = {
 			pathname : slugs[0],
 			title
@@ -90,8 +90,11 @@ class PostPage extends PureComponent {
 				</nav>
 				<section className={styles.articleSection}>
 					<aside className={styles.meta}>
-						<time>{moment(publishedAt).format('LL')}</time>
-						<time>{moment(publishedAt).format('LT')}</time>
+						<time dateTime={publishedAt}>
+							<span>{moment(publishedAt).format('LL')}</span>
+							<span>{moment(publishedAt).format('LT')}</span>
+						</time>
+						<Tags className={styles.tags} tags={tags} />
 					</aside>
 					<article className={styles.article}>
 						<h1 className={styles.title}>{title}</h1>

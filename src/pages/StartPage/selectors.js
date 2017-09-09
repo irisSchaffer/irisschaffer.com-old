@@ -1,15 +1,28 @@
 import { createSelector, createStructuredSelector } from 'reselect'
 
 import { startPageSelector, postsSelector } from 'data/content/selectors'
+import loadMoreModule from 'data/loadMore'
 
 import { NAME } from './constants'
 
-const shownPostsSelector = state => state.getIn([NAME, 'shownPosts'], 3)
+const tagSelector = (state, { match }) => match.params && match.params.tag
+
+const loadMoreModuleSelector = createSelector(
+	startPageSelector,
+	startPage => loadMoreModule(NAME, startPage.shownPosts)
+)
+
+const shownPostsSelector = createSelector(
+	state => state,
+	loadMoreModuleSelector,
+	(state, module) => module.selectors.shownPostsSelector(state)
+)
 
 const sortedPostsSelector = createSelector(
 	startPageSelector,
 	postsSelector,
-	(startPage, posts) => {
+	tagSelector,
+	(startPage, posts, tag) => {
 		const selected = startPage.selected
 			.toList()
 			.map(id => posts.get(id))
@@ -21,7 +34,13 @@ const sortedPostsSelector = createSelector(
 			))
 			.filter(post => !startPage.selected.includes(post.id))
 
-		return selected.concat(sortedPosts)
+		const all = selected.concat(sortedPosts)
+
+		if (tag) {
+			return all.filter(post => post.tags.includes(tag))
+		}
+
+		return all
 	}
 )
 
@@ -38,7 +57,8 @@ const hasMorePostsSelector = createSelector(
 )
 
 export default createStructuredSelector({
-	startPage    : startPageSelector,
-	posts        : paginatedPostsSelector,
-	hasMorePosts : hasMorePostsSelector
+	loadMoreModule : loadMoreModuleSelector,
+	startPage      : startPageSelector,
+	posts          : paginatedPostsSelector,
+	hasMorePosts   : hasMorePostsSelector
 })

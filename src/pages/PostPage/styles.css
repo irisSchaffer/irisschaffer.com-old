@@ -1,7 +1,7 @@
 .articleSection,
 .shareSection,
 .commentsSection {
-	max-width: 1440px;
+	width: 100%;
 	margin: 0 auto;
 	padding: 20px;
 	position: relative;
@@ -17,9 +17,8 @@
 	position: relative;
 
 	article {
-		max-width: 800px;
-
 		@media (--tabletUp) {
+			max-width: 600px;
 			width: 80%;
 		}
 
@@ -35,15 +34,15 @@
 }
 
 .meta {
-	time {
-		& + time {
+	time > * {
+		& + * {
 			margin-left: 0.5em;
 		}
 
 		@media (--tabletUp) {
 			display: block;
 
-			& + & {
+			& + * {
 				margin-left: 0;
 			}
 		}
@@ -56,6 +55,15 @@
 
 		position: relative;
 		top: 0.4em;
+
+		> * + * {
+			margin-top: 0.5em;
+		}
+
+		.tags {
+			max-width: 200px;
+			float: right;
+		}
 	}
 
 	@media (--desktopBig) {
@@ -136,19 +144,18 @@
 
 .fixedShare,
 .nav .arrow {
-	--sidebar: 0.2;
-	width: calc((100% - 80px) * var(--sidebar));
 	left: 20px;
 
 	padding-right: 20px;
 	text-align: right;
 
 	@media (--tabletUp) {
+		width: calc((100% - 80px) * 0.2);
 		left: 40px;
 	}
 
 	@media (--desktopBig) {
-		--sidebar: 0.4;
+		width: calc((100% - 80px) * 0.4);
 
 		padding-right: 40px;
 	}

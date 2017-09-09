@@ -2,12 +2,7 @@
 	max-width: 1400px;
 	padding: 20px;
 
-	a {
-		color: var(--darkGray);
-		text-decoration: none;
-
-		transition: color 0.2s ease;
-	}
+	position: relative;
 
 	@media (--tabletUp) {
 		padding: 60px 40px;
@@ -16,6 +11,10 @@
 
 .wrapper {
 	display: block;
+
+	color: var(--darkGray);
+
+	transition: color 0.2s ease;
 
 	> * + * {
 		margin-top: 0.8em;

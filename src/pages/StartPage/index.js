@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { List } from 'immutable'
 
@@ -7,31 +8,32 @@ import { addReducer, removeReducer } from 'utils/reducers'
 import { Records } from 'data/content'
 import { Header, Button, PostPreview, MetaHelmet } from 'components'
 
-import { NAME } from './constants'
-import reducer from './reducer'
 import selector from './selectors'
-import { loadMore } from './actions'
 
 import styles from './styles.css'
 
 class Startpage extends PureComponent {
 	static propTypes = {
-		startPage    : PropTypes.instanceOf(Records.StartPage).isRequired,
-		posts        : PropTypes.instanceOf(List).isRequired,
-		hasMorePosts : PropTypes.bool.isRequired,
-		dispatch     : PropTypes.func.isRequired
+		loadMoreModule : PropTypes.object.isRequired,
+		startPage      : PropTypes.instanceOf(Records.StartPage).isRequired,
+		posts          : PropTypes.instanceOf(List).isRequired,
+		hasMorePosts   : PropTypes.bool.isRequired,
+		dispatch       : PropTypes.func.isRequired
 	}
 
 	componentWillMount() {
-		addReducer(NAME, reducer)
+		const { loadMoreModule } = this.props
+		addReducer(loadMoreModule.constants.NAME, loadMoreModule.reducer)
 	}
 
 	componentWillUnmount() {
-		removeReducer(NAME)
+		removeReducer(this.props.loadMoreModule.constants.NAME)
 	}
 
 	loadMore = () => {
-		this.props.dispatch(loadMore(this.props.startPage.shownPosts))
+		this.props.dispatch(this.props.loadMoreModule.actions.loadMore(
+			this.props.startPage.shownPosts
+		))
 	}
 
 	render() {
@@ -56,7 +58,7 @@ class Startpage extends PureComponent {
 					{this.props.hasMorePosts && (
 						<section className={styles.loadMoreSection}>
 							<Button onClick={this.loadMore} size="large">
-								Load More
+								<h2>Load More</h2>
 							</Button>
 						</section>
 					)}
@@ -66,4 +68,4 @@ class Startpage extends PureComponent {
 	}
 }
 
-export default connect(selector)(Startpage)
+export default withRouter(connect(selector)(Startpage))
