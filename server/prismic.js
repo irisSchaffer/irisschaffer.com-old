@@ -1,8 +1,9 @@
 const prismic = require('prismic-javascript')
-const createGraphQL = require('./graphql')
 const apicache = require('apicache')
-const cache = apicache.middleware
 const humps = require('humps')
+const bodyParser = require('body-parser')
+const createGraphQL = require('./graphql')
+const cache = apicache.middleware
 
 const graphql = createGraphQL((fieldName, rootValue, args, context) =>
 	rootValue && rootValue[fieldName] || context[fieldName]
@@ -64,11 +65,19 @@ const format = (data) => {
 }
 
 module.exports = (app, path, cacheDuration = '1 day') => {
-	app.use(`${path}/sync`, (req, res) => {
-		getApiContent()
-		apicache.clear()
-		res.send('received')
-	})
+	app.use(
+		`${path}/sync`,
+		bodyParser.json(),
+		(req, res) => {
+			if (process.env.PRISMIC_WEBHOOK_SECRET && req.body.secret !== process.env.PRISMIC_WEBHOOK_SECRET) {
+				res.status(401).end()
+			} else {
+				getApiContent()
+				apicache.clear()
+				res.send('received')
+			}
+		}
+	)
 
 	app.use(path, cache(cacheDuration), (req, res) => {
 		res.json(graphql(content, req.query.query))

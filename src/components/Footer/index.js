@@ -9,7 +9,7 @@ import styles from './styles.css'
 
 const Footer = ({ className, socialLinks, children }) => (
 	<footer className={classnames(styles.root, className)}>
-		<div dangerouslySetInnerHTML={{ __html : children}} />
+		<div dangerouslySetInnerHTML={{ __html : children }} />
 
 		<SocialLinks className={styles.socialLinks} socialLinks={socialLinks} />
 	</footer>
