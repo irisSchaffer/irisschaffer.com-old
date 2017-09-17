@@ -20,6 +20,11 @@
 		}
 	}
 
+	hr {
+	    border-width: 3px 0 0;
+	    margin: 1.5em 0;
+	}
+
 	blockquote {
 		padding-left: 15px;
 
@@ -58,8 +63,20 @@
 	}
 
 	pre {
-		padding: 10px;
+		width: calc(100% + 40px);
+		position: relative;
+		left: -20px;
+		right: -20px;
+		padding: 10px 20px;
 		overflow: auto;
+
+		@media (--tablet) {
+			left: -10px;
+			right: -10px;
+			padding: 10px;
+
+			width: calc(100% + 20px);
+		}
 
 		code {
 			padding: 0;
