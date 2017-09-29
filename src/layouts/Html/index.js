@@ -2,13 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
-const Html = ({ content, state, assets = {}, chunks = {}, icons = {}, dev }) => {
+const dev = process.env.NODE_ENV !== 'production'
+
+const Html = ({ content, state, assets, chunks, icons }) => {
 	const head = Helmet.renderStatic()
 	const headHtml = [
 		head.title.toString(),
 		head.meta.toString(),
 		head.link.toString(),
-		...(icons.html && icons.html || []),
+		...(icons && icons.html || []),
 		'<link href="https://fonts.googleapis.com/css?family=Lato:300,900" rel="stylesheet">',
 		'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">',
 		!dev && `<link rel="stylesheet" type="text/css" href=${assets.client.css} />` || ''
@@ -43,8 +45,7 @@ Html.propTypes = {
 	state   : PropTypes.string.isRequired,
 	assets  : PropTypes.object,
 	chunks  : PropTypes.object,
-	icons   : PropTypes.object,
-	dev     : PropTypes.bool.isRequired
+	icons   : PropTypes.object
 }
 
 Html.defaultProps = {

@@ -1,21 +1,21 @@
-import { Map } from 'immutable'
+import { Set } from 'immutable'
 import { END } from 'redux-saga'
 
 import { sagaMiddleware } from 'utils/middleware'
 
-let tasks = new Map()
+let tasks = new Set()
 
-export const addSaga = (key, saga, ...args) => {
+export const addSaga = (saga, ...args) => {
 	const task = sagaMiddleware.run(saga, ...args)
-	tasks = tasks.set(key, task)
+	tasks = tasks.add(task)
 	return task
 }
 
-export const removeSaga = key => {
-	if (!tasks.get(key)) return
+export const removeSaga = saga => {
+	if (!tasks.includes(saga)) return
 
-	tasks.get(key).cancel()
-	tasks = tasks.delete(key)
+	tasks.get(saga).cancel()
+	tasks = tasks.delete(saga)
 }
 
 export default store => {

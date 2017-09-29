@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { addReducer, removeReducer } from 'utils/reducers'
-import { addSaga, removeSaga } from 'utils/sagas'
+import { addSaga } from 'utils/sagas'
 import { Site } from 'layouts'
 import { Error as ErrorModule, Loading } from 'components'
 
 import { NAME } from './constants'
 import selector from './selectors'
 import reducer from './reducer'
-import init from './sagas'
+import loadData from './sagas'
 
 class App extends PureComponent {
 	static propTypes = {
@@ -25,12 +25,11 @@ class App extends PureComponent {
 
 	componentWillMount() {
 		addReducer(NAME, reducer)
-		addSaga('init', init)
+		addSaga(loadData)
 	}
 
 	componentWillUnmount() {
 		removeReducer(NAME)
-		removeSaga('init')
 	}
 
 	render() {

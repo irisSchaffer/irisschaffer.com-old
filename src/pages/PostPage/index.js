@@ -45,12 +45,6 @@ class PostPage extends PureComponent {
 		this.onScroll()
 	}
 
-	componentWillReceiveProps({ location }) {
-		if (process.browser && location.pathname !== this.props.location.pathname) {
-			window.scrollTo(0, 0)
-		}
-	}
-
 	onScroll = () => {
 		if (!this.$.shareSection) {
 			return

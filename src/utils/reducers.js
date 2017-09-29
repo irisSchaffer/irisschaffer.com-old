@@ -23,7 +23,6 @@ export const removeReducer = key => {
 }
 
 export default (prevState = new Map(), action) => reducers.reduce(
-	(state, reducer, key) =>
-		state.set(key, reducer(state.get(key), action))
-	, prevState
+	(state, reducer, key) => state.set(key, reducer(state.get(key), action)),
+	prevState
 )
