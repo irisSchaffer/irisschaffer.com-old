@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import classnames from 'classnames'
 
+import { back } from 'data/routing/actions'
 import { Records } from 'data/content'
 import { DisqusThread } from 'containers'
 import { FacebookShare, TwitterShare } from 'containers/SocialShare'
@@ -58,11 +59,7 @@ class PostPage extends PureComponent {
 	}
 
 	onBack = () => {
-		if (document.referrer.length === 0 || document.referrer.includes(process.env.HOST)) {
-			this.props.history.goBack()
-		} else {
-			this.props.history.push('/')
-		}
+		this.props.dispatch(back())
 	}
 
 	render() {

@@ -1,46 +1,30 @@
-import { put, select, takeEvery } from 'redux-saga/effects'
-import { goBack, push, replace, LOCATION_CHANGE } from 'react-router-redux'
+import { put, select, takeEvery, take, fork } from 'redux-saga/effects'
+import { goBack, push, LOCATION_CHANGE } from 'react-router-redux'
 
-import { reset } from './actions'
 import { BACK } from './constants'
-import { hasHistorySelector, lastLocationSelector } from './selectors'
+import { hasHistorySelector, browserHistoryLengthSelector } from './selectors'
 
 export function* back() {
 	const hasHistory = yield select(hasHistorySelector)
 
 	if (hasHistory) {
 		yield put(goBack())
-		return
 	}
 
 	yield put(push({ pathname : '/' }))
 }
 
-function* scrollUp({ payload }) {
-	console.log(payload)
-	const prevLocation = yield select(lastLocationSelector)
-	if (!prevLocation) {
-		return
-	}
+function* scrollUp() {
+	let historyBefore = yield select(browserHistoryLengthSelector)
+	while (true) {
+		yield take(LOCATION_CHANGE)
+		const historyAfter = yield select(browserHistoryLengthSelector)
 
-	const pathChanged = prevLocation.pathname !== payload.pathname
-	if (pathChanged) {
-		window.scrollTo(0, 0)
-	}
-}
+		if (historyBefore !== historyAfter) {
+			window.scroll(0, 0)
+		}
 
-function* resetHistoryIfReferred() {
-	if (document.referrer && !document.referrer.includes('localhost') && !document.referrer.includes(process.env.HOST)) {
-		yield put(reset())
-	}
-}
-
-function* redirectOnTrailingSlash({ payload : { pathname, ...rest } }) {
-	if (pathname[pathname.length - 1] === '/' && pathname.length > 1) {
-		yield put(replace({
-			...rest,
-			pathname : pathname.substr(0, pathname.length - 1)
-		}))
+		historyBefore = historyAfter
 	}
 }
 
@@ -62,8 +46,7 @@ function hashLinkScroll(hash, retryCount = 0, retryLimit = 300) {
 }
 
 export default function* () {
+	yield fork(scrollUp)
 	yield takeEvery(BACK, back)
-	yield takeEvery(LOCATION_CHANGE, scrollUp)
 	yield takeEvery(LOCATION_CHANGE, scrollToHash)
-	yield takeEvery(LOCATION_CHANGE, redirectOnTrailingSlash)
 }

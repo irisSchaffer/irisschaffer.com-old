@@ -1,12 +1,13 @@
-import { Map } from 'immutable'
+import { Map, List } from 'immutable'
 
 import { LOCATION_CHANGE } from 'react-router-redux'
+import browserHistory from 'utils/history'
 import * as constants from './constants'
 
 const initialState = new Map({
-	numberChanges             : 0,
 	locationBeforeTransitions : null,
-	lastLocation              : null
+	history                   : new List(),
+	browserHistoryLength      : browserHistory.length
 })
 
 export default function (state = initialState, action) {
@@ -15,14 +16,24 @@ export default function (state = initialState, action) {
 
 		case LOCATION_CHANGE:
 			return state
-				.update('numberChanges', (val) => val + 1)
-				.set('lastLocation', state.get('locationBeforeTransitions'))
 				.set('locationBeforeTransitions', action.payload)
+				.set('browserHistoryLength', browserHistory.length)
+				.update('history', history => {
+					const bhDiff = state.get('browserHistoryLength') - browserHistory.length
+					if (
+						bhDiff === 0
+						|| (history.size !== 0 && history.last().pathname === action.payload.pathname)
+					) {
+						return history
+					}
+
+					return [...Array(Math.max(bhDiff + 1, 0))]
+						.reduce((h) => h.pop(), history)
+						.push(action.payload)
+				})
 
 		case constants.RESET:
-			return state
-				.set('numberChanges', initialState.get('numberChanges'))
-				.set('lastLocation', initialState.get('lastLocation'))
+			return state.set('history', initialState.get('history'))
 
 		// DEFAULT
 
