@@ -39,8 +39,6 @@ class PostPage extends PureComponent {
 	}
 
 	componentDidMount() {
-		window.scrollTo(0, 0)
-
 		window.addEventListener('scroll', this.onScroll)
 		this.onScroll()
 	}

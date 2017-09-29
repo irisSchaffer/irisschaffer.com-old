@@ -1,16 +1,12 @@
-import store from 'store'
-import expirePlugin from 'store/plugins/expire'
-
 import transit from './transit'
 
-store.addPlugin(expirePlugin)
 
-export function save(key, data, duration) {
-	store.set(key, transit.toJSON(data), new Date().getTime() + duration)
+export function save(key, data) {
+	window.sessionStorage.setItem(key, transit.toJSON(data))
 }
 
 export function load(key) {
-	const selection = store.get(key)
+	const data = window.sessionStorage.getItem(key)
 
-	return selection && transit.fromJSON(selection)
+	return data && transit.fromJSON(data) || undefined
 }

@@ -2,8 +2,12 @@ import { Set } from 'immutable'
 import { END } from 'redux-saga'
 
 import { sagaMiddleware } from 'utils/middleware'
+import { sagas as routingSaga } from 'data/routing'
 
 let tasks = new Set()
+const appSagas = [
+	routingSaga
+]
 
 export const addSaga = (saga, ...args) => {
 	const task = sagaMiddleware.run(saga, ...args)
@@ -19,7 +23,10 @@ export const removeSaga = saga => {
 	tasks = tasks.delete(saga)
 }
 
-export default store => {
+export const addAppSagas = () => appSagas.map(saga => addSaga(saga))
+
+export const endSagas = store => {
 	store.dispatch(END)
-	return tasks.map(saga => saga.done).toArray()
 }
+
+export const getTaskPromises = () => tasks.map(saga => saga.done).toArray()

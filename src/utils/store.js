@@ -3,6 +3,7 @@ import { createStore, compose } from 'redux'
 
 import configureMiddleware from './middleware'
 import reducer from './reducers'
+import { addAppSagas } from './sagas'
 
 const composeEnhancers = process.browser ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose
 
@@ -14,6 +15,8 @@ export default (initialState = new Map()) => {
 			configureMiddleware()
 		)
 	)
+
+	addAppSagas()
 
 	if (module.hot) {
 		module.hot.accept('./reducers', () => {
