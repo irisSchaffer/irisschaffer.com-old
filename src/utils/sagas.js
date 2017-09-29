@@ -8,6 +8,7 @@ let tasks = new Set()
 export const addSaga = (saga, ...args) => {
 	const task = sagaMiddleware.run(saga, ...args)
 	tasks = tasks.add(task)
+	task.done.then(() => tasks.delete(saga))
 	return task
 }
 

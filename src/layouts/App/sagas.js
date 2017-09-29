@@ -26,6 +26,7 @@ export default function* (timeout = 10000) {
 			throw new RequestTimeout()
 		}
 	} catch (err) {
+		console.log('saga error', err)
 		yield put(setError({
 			message : err.message || 'Undefined Error',
 			status  : err.status || 400
