@@ -12,9 +12,6 @@
         ]
       }
     ],
-    "media-feature-no-missing-punctuation": null,
-    "rule-non-nested-empty-line-before": null,
-    "rule-nested-empty-line-before": null,
     "rule-empty-line-before": [
       "always",
       {

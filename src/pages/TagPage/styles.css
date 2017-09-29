@@ -28,8 +28,8 @@
 	}
 
 	> * {
-		position: relative;
 		margin: 0 auto;
+		position: relative;
 
 		color: var(--white);
 
