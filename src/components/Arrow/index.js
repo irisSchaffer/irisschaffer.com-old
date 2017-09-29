@@ -4,8 +4,15 @@ import classnames from 'classnames'
 
 import styles from './styles.css'
 
-const Arrow = ({ className, direction }) => (
-	<span  className={classnames(styles.root, className, styles[direction] )} >
+const Arrow = ({ className, direction, theme }) => (
+	<span
+		className={classnames(
+			styles.root,
+			className,
+			styles[direction],
+			styles[theme]
+		)}
+	>
 		<span className={styles.arrow} />
 
 		<span className={styles.arrowWrapper}>
@@ -16,12 +23,14 @@ const Arrow = ({ className, direction }) => (
 
 Arrow.propTypes = {
 	className : PropTypes.string,
-	direction : PropTypes.oneOf(['left', 'right'])
+	direction : PropTypes.oneOf(['left', 'right']),
+	theme     : PropTypes.oneOf(['dark', 'bright'])
 }
 
 Arrow.defaultProps = {
 	className : '',
-	direction : 'right'
+	direction : 'right',
+	theme     : 'bright'
 }
 
 export default Arrow

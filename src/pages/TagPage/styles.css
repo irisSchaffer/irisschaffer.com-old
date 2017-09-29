@@ -11,6 +11,31 @@
 	}
 }
 
-.header svg {
-	height: 1em;
+.header {
+	width: 100%;
+	padding: 20px;
+	background-color: var(--swatchPrimary);
+
+	svg {
+		height: 1em;
+		position: relative;
+		top: -0.05em;
+	}
+
+	> * {
+		position: relative;
+		margin: 0 auto;
+
+		color: var(--white);
+
+		@media (--tabletUp) {
+			left: calc((100% - 80px) * 0.4 + 40px);
+		}
+	}
+}
+
+
+.arrow {
+	position: absolute;
+	left: 40px;
 }

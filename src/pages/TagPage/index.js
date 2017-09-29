@@ -5,26 +5,24 @@ import { connect } from 'react-redux'
 
 import { Records } from 'data/content'
 import { PostListing } from 'containers'
-import { Header, MetaHelmet, Svg } from 'components'
+import { MetaHelmet, Svg, Arrow } from 'components'
 
 import selector from './selectors'
 
 import styles from './styles.css'
 
-const TagPage = ({ tag, startPage }) => (
+const TagPage = ({ tag, startPage : { meta, shownPosts } }) => (
 	<div>
-		<MetaHelmet meta={startPage.meta} />
-		<Header
-			className={styles.header}
-			title={startPage.title}
-			image={startPage.image}
-			socialLinks={startPage.socialLinks}
-		>
+		<MetaHelmet meta={meta} />
+		<header className={styles.header}>
+			<button className={styles.arrow}>
+				<Arrow direction="left" theme="dark" />
+			</button>
 			<h2><Svg.Tag /> {tag}</h2>
-		</Header>
+		</header>
 		<main>
 			<PostListing
-				shownPosts={startPage.shownPosts}
+				shownPosts={shownPosts}
 				tags={[tag]}
 				className={styles.posts}
 			/>

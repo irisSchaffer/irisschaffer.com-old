@@ -57,6 +57,14 @@
 		transform: rotate(45deg);
 	}
 
+	.dark & {
+		background-color: var(--white);
+
+		&:after {
+			border-color: var(--white);
+		}
+	}
+
 	.left & {
 		left: 3px;
 
@@ -71,5 +79,13 @@
 	&:after {
 		border-right: 4px solid var(--swatchPrimary);
 		border-top: 4px solid var(--swatchPrimary);
+	}
+
+	.dark & {
+		background-color: var(--swatchPrimaryHighlight);
+
+		&:after {
+			border-color: var(--swatchPrimaryHighlight);
+		}
 	}
 }
