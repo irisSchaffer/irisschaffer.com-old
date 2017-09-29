@@ -18,7 +18,7 @@ const TagPage = ({ tag, startPage : { meta, shownPosts } }) => (
 			<button className={styles.arrow}>
 				<Arrow direction="left" theme="dark" />
 			</button>
-			<h2><Svg.Tag /> {tag}</h2>
+			<h1><Svg.Tag /> {tag}</h1>
 		</header>
 		<main>
 			<PostListing
