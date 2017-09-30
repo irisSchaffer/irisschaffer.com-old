@@ -6,17 +6,11 @@ import * as constants from './constants'
 
 const initialState = new Map({
 	locationBeforeTransitions : null,
-	initialHistoryLength      : null
+	initialHistoryLength      : browserHistory.length
 })
 
 export default function (state = initialState, action) {
 	switch (action.type) {
-		case '@@INIT':
-			return state.update(
-				'initialHistoryLength',
-				length => length === null && browserHistory.length || length
-			)
-
 		// ROUTER
 
 		case LOCATION_CHANGE:
