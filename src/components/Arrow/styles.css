@@ -7,8 +7,10 @@
 	position: relative;
 	top: 3px;
 
-	&:hover .arrow:before {
-		width: 53px;
+	@media (hover: hover) {
+		&:hover .arrow:before {
+			width: 53px;
+		}
 	}
 }
 
@@ -25,8 +27,10 @@
 	transform: translateY(-50%);
 	transition: width 0.3s ease;
 
-	.root:hover & {
-		width: 100%;
+	@media (hover: hover) {
+		.root:hover & {
+			width: 100%;
+		}
 	}
 }
 

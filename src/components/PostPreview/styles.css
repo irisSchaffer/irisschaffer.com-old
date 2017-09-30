@@ -20,11 +20,13 @@
 		margin-top: 0.8em;
 	}
 
-	&:hover {
-		color: #585858;
+	@media (hover: hover) {
+		&:hover {
+			color: #585858;
 
-		& .arrow > span > span:nth-child(2) {
-			width: 100%;
+			& .arrow > span > span:nth-child(2) {
+				width: 100%;
+			}
 		}
 	}
 
