@@ -1,4 +1,5 @@
 .root {
+	overflow-wrap: break-word;
 
 	a {
 		color: inherit;
