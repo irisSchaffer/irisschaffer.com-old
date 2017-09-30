@@ -13,12 +13,24 @@
 
 .header {
 	width: 100%;
-	padding: 20px;
-	background-color: var(--swatchPrimary);
 	position: relative;
 
+	color: var(--white);
+	background-color: var(--swatchPrimary);
+
+	> * {
+		justify-content: flex-start;
+	}
+
 	h1 {
+		margin: 0;
+		padding: 0.5em 20px;
+
 		font-size: 3rem;
+
+		@media (--tabletUp) {
+			padding: 0.5em 0;
+		}
 	}
 
 	svg {
@@ -27,22 +39,20 @@
 		top: -0.05em;
 	}
 
-	> * {
-		margin: 0 auto;
-		position: relative;
-
-		color: var(--white);
-
-		@media (--tabletUp) {
-			left: calc((100% - 80px) * 0.4 + 40px);
-		}
+	@media (--tabletUp) {
+		display: flex;
+		align-items: center;
 	}
 }
 
 .arrow {
-	position: absolute;
-	top: 50%;
-	left: 40px;
+	height: 60px;
+	padding: 0 20px;
+	position: relative;
+	text-align: left;
 
-	transform: translateY(-50%);
+	@media (--tabletUp) {
+		padding: 0 40px;
+		flex-basis: calc((100% - 80px) * 0.4 + 40px);
+	}
 }
