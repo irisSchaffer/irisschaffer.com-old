@@ -16,6 +16,7 @@
 	transition: color 0.2s ease;
 
 	> * + * {
+		display: block;
 		margin-top: 0.8em;
 	}
 
