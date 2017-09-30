@@ -1,8 +1,8 @@
-import { put, select, takeEvery, take, fork } from 'redux-saga/effects'
+import { put, select, takeEvery } from 'redux-saga/effects'
 import { goBack, push, LOCATION_CHANGE } from 'react-router-redux'
 
 import { BACK } from './constants'
-import { hasHistorySelector, browserHistoryLengthSelector } from './selectors'
+import { hasHistorySelector } from './selectors'
 
 export function* back() {
 	const hasHistory = yield select(hasHistorySelector)
@@ -14,18 +14,12 @@ export function* back() {
 	yield put(push({ pathname : '/' }))
 }
 
-function* scrollUp() {
-	let historyBefore = yield select(browserHistoryLengthSelector)
-	while (true) {
-		yield take(LOCATION_CHANGE)
-		const historyAfter = yield select(browserHistoryLengthSelector)
-
-		if (historyBefore !== historyAfter) {
-			window.scroll(0, 0)
-		}
-
-		historyBefore = historyAfter
+function* scrollUpIfNecessary({ payload : { state } }) {
+	if (!state || !state.link) {
+		return
 	}
+
+	window.scroll(0, 0)
 }
 
 function scrollToHash({ payload }) {
@@ -46,7 +40,7 @@ function hashLinkScroll(hash, retryCount = 0, retryLimit = 300) {
 }
 
 export default function* () {
-	yield fork(scrollUp)
 	yield takeEvery(BACK, back)
+	yield takeEvery(LOCATION_CHANGE, scrollUpIfNecessary)
 	yield takeEvery(LOCATION_CHANGE, scrollToHash)
 }
