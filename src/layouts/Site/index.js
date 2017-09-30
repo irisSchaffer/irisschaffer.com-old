@@ -11,10 +11,10 @@ import FooterModule from 'components/Footer'
 
 import selector from './selectors'
 
-import './styles.css'
+import styles from './styles.css'
 
 const Site = ({ footer, startPage }) => (
-	<div>
+	<div className={styles.root}>
 		<Helmet
 			defaultTitle={startPage.meta.title}
 			titleTemplate={`%s | ${startPage.meta.title}`}
@@ -23,13 +23,15 @@ const Site = ({ footer, startPage }) => (
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 		</Helmet>
 
-		<Switch>
-			<Route path="/" exact component={StartPage} />
-			<Route path="/tags/:tag" exact component={TagPage} />
-			<Route path="/:slug" component={PostPage} />
-		</Switch>
+		<div className={styles.page}>
+			<Switch>
+				<Route path="/" exact component={StartPage} />
+				<Route path="/tags/:tag" exact component={TagPage} />
+				<Route path="/:slug" component={PostPage} />
+			</Switch>
+		</div>
 
-		<FooterModule socialLinks={startPage.socialLinks}>
+		<FooterModule className={styles.footer} socialLinks={startPage.socialLinks}>
 			{footer.text}
 		</FooterModule>
 	</div>

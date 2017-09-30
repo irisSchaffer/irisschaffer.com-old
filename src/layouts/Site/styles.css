@@ -146,3 +146,7 @@ ol {
 
 	list-style-position: inside;
 }
+
+.page {
+	min-height: calc(100vh - 80px);
+}
