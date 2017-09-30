@@ -7,7 +7,6 @@ import { hasHistorySelector } from './selectors'
 export function* back() {
 	const hasHistory = yield select(hasHistorySelector)
 
-	console.log('hasHistory?', hasHistory, window.history.length)
 	if (hasHistory) {
 		yield put(goBack())
 		return

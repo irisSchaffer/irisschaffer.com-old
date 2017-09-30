@@ -12,5 +12,6 @@ export const initialHistoryLengthSelector = state => (
 
 export const hasHistorySelector = createSelector(
 	initialHistoryLengthSelector,
-	initialLength => history.length > initialLength
+	() => history.length,
+	(initialLength, length) => length > initialLength
 )
