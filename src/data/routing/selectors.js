@@ -1,17 +1,16 @@
+import { createSelector } from 'reselect'
+import history from 'utils/history'
 import { NAME } from './constants'
 
-export const hasHistorySelector = (state) => (
-	state.getIn([NAME, 'history']).size > 1
-)
-
-export const locationSelector = (state) => (
+export const locationSelector = state => (
 	state.getIn([NAME, 'locationBeforeTransitions'])
 )
 
-export const historySelector = (state) => (
-	state.getIn([NAME, 'history'])
+export const initialHistoryLengthSelector = state => (
+	state.getIn([NAME, 'initialHistoryLength'])
 )
 
-export const browserHistoryLengthSelector = state => (
-	state.getIn([NAME, 'browserHistoryLength'])
+export const hasHistorySelector = createSelector(
+	initialHistoryLengthSelector,
+	initialLength => history.length > initialLength
 )
