@@ -22,7 +22,7 @@ const Html = ({ content, state, assets, chunks, icons }) => {
 			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 			})(window,document,'script','dataLayer','GTM-TSXXZH6');</script>
 			<!-- End Google Tag Manager -->
-		`
+		` || ''
 	]
 	const htmlAttrs = head.htmlAttributes.toComponent()
 	const bodyAttrs = head.bodyAttributes.toComponent()
