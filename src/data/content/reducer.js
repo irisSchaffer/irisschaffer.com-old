@@ -12,14 +12,14 @@ const initialSate = {
 	fetched   : false
 }
 
-export default function (state = fromJS(initialSate), { type, content }) {
+export default function (state = fromJS(initialSate), { type, payload }) {
 	switch (type) {
 		case constants.SET_CONTENT:
 			return state
 				.set('fetched', true)
-				.set('startPage', new StartPage(content.startPage))
-				.set('footer', new Footer(content.footer))
-				.set('posts', content.posts.reduce((res, post) => (
+				.set('startPage', new StartPage(payload.startPage))
+				.set('footer', new Footer(payload.footer))
+				.set('posts', payload.posts.reduce((res, post) => (
 					res.set(post.id, new Post(post))
 				), new Map()))
 

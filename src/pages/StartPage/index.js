@@ -2,29 +2,48 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { List } from 'immutable'
 
+import { addReducer } from 'utils/reducers'
 import { Records } from 'data/content'
-import { PostListing } from 'containers'
-import { Header, MetaHelmet } from 'components'
+import { Header, MetaHelmet, PostListing } from 'components'
+import loadMore from 'data/loadMore'
 
 import selector from './selectors'
 
 import styles from './styles.css'
 
-class Startpage extends PureComponent {
+export const NAME = 'pages/start'
+const loadMoreModule = loadMore(NAME)
+
+class StartPage extends PureComponent {
 	static propTypes = {
-		startPage : PropTypes.instanceOf(Records.StartPage).isRequired
+		dispatch   : PropTypes.func.isRequired,
+		location   : PropTypes.object.isRequired,
+		hasMore    : PropTypes.bool.isRequired,
+		shownPosts : PropTypes.number.isRequired,
+		posts      : PropTypes.instanceOf(List).isRequired,
+		startPage  : PropTypes.instanceOf(Records.StartPage).isRequired
+	}
+
+	componentWillMount() {
+		const { location : { state }, dispatch, shownPosts, startPage } = this.props
+		addReducer(NAME, loadMoreModule.reducer)
+		if (state && state.link || shownPosts === 0) {
+			dispatch(loadMoreModule.actions.setShown(
+				startPage.shownPosts
+			))
+		}
+	}
+
+	onLoadMore = () => {
+		this.props.dispatch(loadMoreModule.actions.loadMore(
+			this.props.startPage.shownPosts
+		))
 	}
 
 	render() {
-		const {
-			title,
-			subtitle,
-			image,
-			meta,
-			socialLinks,
-			shownPosts
-		} = this.props.startPage
+		const { title, subtitle, image, meta, socialLinks } = this.props.startPage
 
 		return (
 			<div>
@@ -37,7 +56,9 @@ class Startpage extends PureComponent {
 				/>
 				<main>
 					<PostListing
-						shownPosts={shownPosts}
+						posts={this.props.posts}
+						hasMore={this.props.hasMore}
+						onLoadMore={this.onLoadMore}
 						className={styles.posts}
 					/>
 				</main>
@@ -46,4 +67,4 @@ class Startpage extends PureComponent {
 	}
 }
 
-export default withRouter(connect(selector)(Startpage))
+export default withRouter(connect(selector)(StartPage))

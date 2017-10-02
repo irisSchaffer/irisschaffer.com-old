@@ -10,10 +10,10 @@ const initialState = new Map({
 export default function (state = initialState, { type, payload }) {
 	switch (type) {
 		case constants.SET_LOADED :
-			return state.set('loaded', payload.loaded)
+			return state.set('loaded', payload)
 
 		case constants.SET_ERROR :
-			return state.set('error', payload.error)
+			return state.set('error', payload)
 
 		default :
 			return state

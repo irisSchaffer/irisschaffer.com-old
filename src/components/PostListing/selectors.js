@@ -1,20 +1,10 @@
 import { createSelector, createStructuredSelector } from 'reselect'
 
 import { startPageSelector, postsSelector } from 'data/content/selectors'
-import loadMoreModule from 'data/loadMore'
 
 const tagsSelector = (state, props) => props.tags || []
 
-const loadMoreModuleSelector = createSelector(
-	startPageSelector,
-	startPage => loadMoreModule('postListing', startPage.shownPosts)
-)
-
-const shownPostsSelector = createSelector(
-	state => state,
-	loadMoreModuleSelector,
-	(state, module) => module.selectors.shownPostsSelector(state)
-)
+const shownPostsSelector = (state, props) => props.shownPosts
 
 const sortedPostsSelector = createSelector(
 	startPageSelector,
