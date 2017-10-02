@@ -19,7 +19,7 @@ const loadMoreModule = loadMore(NAME)
 class StartPage extends PureComponent {
 	static propTypes = {
 		dispatch   : PropTypes.func.isRequired,
-		location   : PropTypes.object.isRequired,
+		history    : PropTypes.object.isRequired,
 		hasMore    : PropTypes.bool.isRequired,
 		shownPosts : PropTypes.number.isRequired,
 		posts      : PropTypes.instanceOf(List).isRequired,
@@ -27,9 +27,9 @@ class StartPage extends PureComponent {
 	}
 
 	componentWillMount() {
-		const { location : { state }, dispatch, shownPosts, startPage } = this.props
+		const { history : { action }, dispatch, shownPosts, startPage } = this.props
 		addReducer(NAME, loadMoreModule.reducer)
-		if (state && state.link || shownPosts === 0) {
+		if (action === 'PUSH' || shownPosts === 0) {
 			dispatch(loadMoreModule.actions.setShown(
 				startPage.shownPosts
 			))

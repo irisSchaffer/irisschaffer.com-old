@@ -17,35 +17,15 @@ class Link extends Component {
 
 	getElement = href => typeof href === 'string' && href.includes('://') && 'a' || ReactRouterLink
 
-	getLocationObject = href => {
-		const state = { link : true }
-		if (typeof href === 'string') {
-			return {
-				pathname : href,
-				state
-			}
-		}
-
-		return {
-			...href,
-			state : {
-				...state,
-				...href.state
-			}
-		}
-	}
-
 	render() {
 		const { children, href, ...restProps } = this.props
 
 		const Element = this.getElement(href)
 
-		const to = Element === 'a' && href || this.getLocationObject(href)
-
 		return (
 			<Element
 				{...restProps}
-				{...{ [Element === 'a' ? 'href' : 'to'] : to }}
+				{...{ [Element === 'a' ? 'href' : 'to'] : href }}
 			>
 				{children}
 			</Element>

@@ -1,6 +1,7 @@
 import { put, select, takeEvery } from 'redux-saga/effects'
 import { goBack, push, LOCATION_CHANGE } from 'react-router-redux'
 
+import history from 'utils/history'
 import { BACK } from './constants'
 import { hasHistorySelector } from './selectors'
 
@@ -15,8 +16,8 @@ export function* back() {
 	yield put(push({ pathname : '/' }))
 }
 
-function* scrollUpIfNecessary({ payload : { state } }) {
-	if (!state || !state.link) {
+function* scrollUpIfNecessary() {
+	if (history.action === 'POP') {
 		return
 	}
 

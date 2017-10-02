@@ -18,7 +18,7 @@ export const NAME = 'pages/tag'
 class TagPage extends Component {
 	static propTypes = {
 		dispatch    : PropTypes.func.isRequired,
-		location    : PropTypes.object.isRequired,
+		history     : PropTypes.object.isRequired,
 		startPage   : PropTypes.instanceOf(Records.StartPage).isRequired,
 		tag         : PropTypes.string.isRequired,
 		shownPosts  : PropTypes.number.isRequired,
@@ -28,12 +28,12 @@ class TagPage extends Component {
 	}
 
 	componentWillMount() {
-		const { reducerName, startPage, location : { state } } = this.props
+		const { reducerName, startPage, history : { action } } = this.props
 		this.loadMoreModule = loadMore(reducerName, startPage.shownPosts)
 		addReducer(reducerName, this.loadMoreModule.reducer)
 
-		console.log(state, this.props.shownPosts)
-		if (state && state.link || this.props.shownPosts === 0) {
+		console.log(action, this.props.shownPosts)
+		if (action === 'PUSH' || this.props.shownPosts === 0) {
 			this.props.dispatch(this.loadMoreModule.actions.setShown(startPage.shownPosts))
 		}
 	}
