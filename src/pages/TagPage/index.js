@@ -4,37 +4,32 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { List } from 'immutable'
 
-import { addReducer } from 'utils/reducers'
+import { compose } from 'utils/hoc'
+import withLoadMore from 'hocs/withLoadMore'
 import { back } from 'data/routing/actions'
 import { Records } from 'data/content'
-import loadMore from 'data/loadMore'
 import { MetaHelmet, Svg, Arrow, PostListing } from 'components'
 
-import selector from './selectors'
+import selector, { postsSelector } from './selectors'
 import styles from './styles.css'
 
 export const NAME = 'pages/tag'
 
 class TagPage extends Component {
 	static propTypes = {
-		dispatch    : PropTypes.func.isRequired,
-		history     : PropTypes.object.isRequired,
-		startPage   : PropTypes.instanceOf(Records.StartPage).isRequired,
-		tag         : PropTypes.string.isRequired,
-		shownPosts  : PropTypes.number.isRequired,
-		hasMore     : PropTypes.bool.isRequired,
-		posts       : PropTypes.instanceOf(List).isRequired,
-		reducerName : PropTypes.string.isRequired
+		dispatch   : PropTypes.func.isRequired,
+		history    : PropTypes.object.isRequired,
+		startPage  : PropTypes.instanceOf(Records.StartPage).isRequired,
+		tag        : PropTypes.string.isRequired,
+		hasMore    : PropTypes.bool.isRequired,
+		entities   : PropTypes.instanceOf(List).isRequired,
+		onLoadMore : PropTypes.func.isRequired,
+		resetShown : PropTypes.func.isRequired
 	}
 
 	componentWillMount() {
-		const { reducerName, startPage, history : { action } } = this.props
-		this.loadMoreModule = loadMore(reducerName, startPage.shownPosts)
-		addReducer(reducerName, this.loadMoreModule.reducer)
-
-		console.log(action, this.props.shownPosts)
-		if (action === 'PUSH' || this.props.shownPosts === 0) {
-			this.props.dispatch(this.loadMoreModule.actions.setShown(startPage.shownPosts))
+		if (this.props.history.action === 'PUSH') {
+			this.props.resetShown()
 		}
 	}
 
@@ -42,14 +37,11 @@ class TagPage extends Component {
 		this.props.dispatch(back())
 	}
 
-	onLoadMore = () => {
-		this.props.dispatch(this.loadMoreModule.actions.loadMore(
-			this.props.startPage.shownPosts
-		))
-	}
-
 	render() {
-		const { tag, startPage : { meta }, posts, hasMore } = this.props
+		const {
+			startPage : { meta },
+			tag, onLoadMore, entities, hasMore
+		} = this.props
 		return (
 			<div>
 				<MetaHelmet meta={meta} />
@@ -61,9 +53,9 @@ class TagPage extends Component {
 				</header>
 				<main>
 					<PostListing
-						posts={posts}
+						posts={entities}
 						hasMore={hasMore}
-						onLoadMore={this.onLoadMore}
+						onLoadMore={onLoadMore}
 						className={styles.posts}
 					/>
 				</main>
@@ -72,4 +64,12 @@ class TagPage extends Component {
 	}
 }
 
-export default withRouter(connect(selector)(TagPage))
+export default compose(
+	withRouter,
+	connect(selector),
+	withLoadMore({
+		entitiesSelector : postsSelector,
+		path             : props => ['pages/tag', props.tag, 'shownPosts'],
+		amount           : props => props.startPage.shownPosts
+	})
+)(TagPage)

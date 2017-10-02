@@ -1,5 +1,5 @@
 // memoize result of function, either uses first arg to memoize or hashArgs function
-const memoize = (fn, hashArgs = args => args[0]) => {
+const memoize = (fn, hashArgs = args => JSON.stringify(args[0])) => {
 	const memory = {}
 
 	return (...args) => {

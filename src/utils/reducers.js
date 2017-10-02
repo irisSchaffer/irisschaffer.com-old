@@ -1,9 +1,10 @@
-import { Map } from 'immutable'
+import { List } from 'immutable'
+import isEqual from 'lodash/isEqual'
 
 import { constants as routingConstants, reducer as routingReducer } from 'data/routing'
 import { save, load } from './persist'
 
-let reducers = new Map()
+let reducers = new List()
 
 export const persistentReducerFactory = (key, reducer) => (state = load(key), action) => {
 	const newState = reducer(state, action)
@@ -11,16 +12,20 @@ export const persistentReducerFactory = (key, reducer) => (state = load(key), ac
 	return newState
 }
 
-export const addReducer = (key, reducer) => {
-	reducers = reducers.set(key, reducer)
+export const addReducer = (path, reducer) => {
+	reducers = reducers.push([path, reducer])
 }
 
-export const addPersistentReducer = (key, reducer) => {
-	addReducer(key, persistentReducerFactory(key, reducer))
+export const addPersistentReducer = (path, reducer) => {
+	addReducer(path, persistentReducerFactory(JSON.stringify(path), reducer))
 }
 
-export const removeReducer = key => {
-	reducers = reducers.delete(key)
+export const removeReducer = (path, reducer) => {
+	const i = reducers.findIndex(([p, r]) => isEqual(p, path) && r === reducer)
+
+	if (i >= 0) {
+		reducers = reducers.delete(i)
+	}
 }
 
 if (process.browser) {
@@ -28,6 +33,9 @@ if (process.browser) {
 }
 
 export default (prevState = new Map(), action) => reducers.reduce(
-	(state, reducer, key) => state.set(key, reducer(state.get(key), action)),
+	(state, [path, reducer]) => {
+		const pathArray = Array.isArray(path) && path || [path]
+		return state.setIn(pathArray, reducer(state.getIn(pathArray), action))
+	},
 	prevState
 )

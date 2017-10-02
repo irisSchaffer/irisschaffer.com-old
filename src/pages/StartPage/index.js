@@ -1,45 +1,31 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { List } from 'immutable'
 
-import { addReducer } from 'utils/reducers'
 import { Records } from 'data/content'
+import { startPagePostsSelector } from 'data/content/selectors'
+import withLoadMore from 'hocs/withLoadMore'
 import { Header, MetaHelmet, PostListing } from 'components'
-import loadMore from 'data/loadMore'
+import { compose } from 'utils/hoc'
 
 import selector from './selectors'
-
 import styles from './styles.css'
-
-export const NAME = 'pages/start'
-const loadMoreModule = loadMore(NAME)
 
 class StartPage extends PureComponent {
 	static propTypes = {
-		dispatch   : PropTypes.func.isRequired,
 		history    : PropTypes.object.isRequired,
 		hasMore    : PropTypes.bool.isRequired,
-		shownPosts : PropTypes.number.isRequired,
-		posts      : PropTypes.instanceOf(List).isRequired,
-		startPage  : PropTypes.instanceOf(Records.StartPage).isRequired
+		entities   : PropTypes.instanceOf(List).isRequired,
+		startPage  : PropTypes.instanceOf(Records.StartPage).isRequired,
+		onLoadMore : PropTypes.func.isRequired,
+		resetShown : PropTypes.func.isRequired
 	}
 
 	componentWillMount() {
-		const { history : { action }, dispatch, shownPosts, startPage } = this.props
-		addReducer(NAME, loadMoreModule.reducer)
-		if (action === 'PUSH' || shownPosts === 0) {
-			dispatch(loadMoreModule.actions.setShown(
-				startPage.shownPosts
-			))
+		if (this.props.history.action === 'PUSH') {
+			this.props.resetShown()
 		}
-	}
-
-	onLoadMore = () => {
-		this.props.dispatch(loadMoreModule.actions.loadMore(
-			this.props.startPage.shownPosts
-		))
 	}
 
 	render() {
@@ -56,9 +42,9 @@ class StartPage extends PureComponent {
 				/>
 				<main>
 					<PostListing
-						posts={this.props.posts}
+						posts={this.props.entities}
 						hasMore={this.props.hasMore}
-						onLoadMore={this.onLoadMore}
+						onLoadMore={this.props.onLoadMore}
 						className={styles.posts}
 					/>
 				</main>
@@ -67,4 +53,11 @@ class StartPage extends PureComponent {
 	}
 }
 
-export default withRouter(connect(selector)(StartPage))
+export default compose(
+	connect(selector),
+	withLoadMore({
+		path             : ['pages/start', 'shownPosts'],
+		amount           : props => props.startPage.shownPosts,
+		entitiesSelector : startPagePostsSelector
+	})
+)(StartPage)
