@@ -13,22 +13,22 @@ const SocialLinks = ({
 }) => (
 	<div className={classnames(className, styles.root)}>
 		{github && (
-			<Link href={github} target="_blank">
+			<Link href={github} target="_blank" rel="noopener" aria-label="Github">
 				<Svg.GitHub />
 			</Link>
 		)}
 		{twitter && (
-			<Link href={twitter} target="_blank">
+			<Link href={twitter} target="_blank" rel="noopener" aria-label="Twitter">
 				<Svg.Twitter />
 			</Link>
 		)}
 		{facebook && (
-			<Link href={facebook} target="_blank">
+			<Link href={facebook} target="_blank" rel="noopener" aria-label="Facebook">
 				<Svg.Facebook />
 			</Link>
 		)}
 		{linkedin && (
-			<Link href={linkedin} target="_blank">
+			<Link href={linkedin} target="_blank" rel="noopener" aria-label="Linkedin">
 				<Svg.Linkedin />
 			</Link>
 		)}

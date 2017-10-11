@@ -46,7 +46,11 @@ class TagPage extends Component {
 			<div>
 				<MetaHelmet meta={meta} />
 				<header className={styles.header}>
-					<button className={styles.arrow} onClick={this.onBack}>
+					<button
+						className={styles.arrow}
+						onClick={this.onBack}
+						aria-label="Back"
+					>
 						<Arrow direction="left" theme="dark" />
 					</button>
 					<h1><Svg.Tag /> {tag}</h1>

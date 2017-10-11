@@ -9,7 +9,7 @@ import styles from './styles.css'
 
 const Header = ({ className, title, subtitle, image, socialLinks, children }) => (
 	<header className={classnames(styles.root, className)}>
-		<Link href={process.env.HOST}>
+		<Link href={process.env.HOST} aria-label="irisschaffer.com">
 			<img {...image.props()} alt={image.alt} />
 		</Link>
 		{title && <h1>{title}</h1>}

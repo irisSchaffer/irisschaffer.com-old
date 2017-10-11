@@ -28,7 +28,11 @@ const PostPreview = ({ className, post }) => (
 					dangerouslySetInnerHTML={{ __html : post.preamble }}
 				/>
 			</Link>
-			<Link href={`/${post.slugs[0]}`} className={styles.arrow}>
+			<Link
+				href={`/${post.slugs[0]}`}
+				className={styles.arrow}
+				aria-label="Read more"
+			>
 				<Arrow />
 			</Link>
 		</div>

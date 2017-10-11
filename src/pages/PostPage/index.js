@@ -17,6 +17,7 @@ import styles from './styles.css'
 
 class PostPage extends PureComponent {
 	static propTypes = {
+		dispatch : PropTypes.func.isRequired,
 		location : PropTypes.object.isRequired,
 		history  : PropTypes.object.isRequired,
 		post     : PropTypes.instanceOf(Records.Post)
@@ -73,7 +74,11 @@ class PostPage extends PureComponent {
 			<main className={styles.root}>
 				<MetaHelmet meta={meta} />
 				<nav className={styles.nav}>
-					<button className={styles.arrow} onClick={this.onBack}>
+					<button
+						className={styles.arrow}
+						onClick={this.onBack}
+						aria-label="Back"
+					>
 						<Arrow direction="left" />
 					</button>
 				</nav>
