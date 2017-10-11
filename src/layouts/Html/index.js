@@ -31,12 +31,17 @@ const Html = ({ content, state, assets, chunks, icons }) => {
 		<html lang="en">
 			<head dangerouslySetInnerHTML={{ __html : headHtml.join(' ') }} {...htmlAttrs} />
 			<body {...bodyAttrs}>
-				{!dev && `
-					<!-- Google Tag Manager (noscript) -->
-					<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TSXXZH6"
-					height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-					<!-- End Google Tag Manager (noscript) -->
-				`}
+				{!dev && [
+					<noscript>
+						<iframe
+							title="Google Tag Manager"
+							src="https://www.googletagmanager.com/ns.html?id=GTM-TSXXZH6"
+							height="0"
+							width="0"
+							style={{ display : 'none', visibility : 'hidden' }}
+						/>
+					</noscript>
+				]}
 
 				<div id="root" dangerouslySetInnerHTML={{ __html : content }} />
 
