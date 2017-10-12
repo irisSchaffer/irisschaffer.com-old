@@ -14,14 +14,10 @@ const ImageRecord = Record({
 
 export default class Image extends ImageRecord {
 	constructor(data = {}, name) {
-		const initData = data instanceof Image
-			? data
-			: ({
-				...data,
-				dimensions : new Dimensions(data.dimensions || {})
-			})
-
-		super(initData, name)
+		super(data instanceof Image && data || {
+			...data,
+			dimensions : new Dimensions(data.dimensions || {})
+		}, name)
 	}
 
 	props() {

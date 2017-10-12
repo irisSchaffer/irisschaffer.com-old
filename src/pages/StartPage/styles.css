@@ -2,7 +2,7 @@
 	background-color: var(--white);
 
 	> *:nth-child(even) {
-		background-color: var(--lightGray);
+		background-color: var(--lightestGray);
 	}
 
 	article > * {

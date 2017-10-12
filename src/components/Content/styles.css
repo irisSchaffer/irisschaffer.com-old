@@ -60,7 +60,7 @@
 
 	pre,
 	code {
-		background-color: #f7f7f7;
+		background-color: var(--lightGray);
 	}
 
 	pre {
@@ -105,7 +105,7 @@
 		}
 
 		tr:nth-child(even) {
-			background-color: #f7f7f7;
+			background-color: var(--lightGray);
 		}
 	}
 
@@ -117,7 +117,7 @@
 		right: -20px;
 		left: -20px;
 		border-top: 3px solid var(--gray);
-		background-color: #f7f7f7;
+		background-color: var(--lightGray);
 
 		font-style: italic;
 

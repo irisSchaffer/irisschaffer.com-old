@@ -13,16 +13,12 @@ const PostRecord = Record({
 }, 'post')
 
 export default class Post extends PostRecord {
-	constructor(data = { meta : {} }, name) {
-		if (data instanceof Post) {
-			super(data, name)
-		} else {
-			super({
-				...data,
-				meta : new Meta(data.meta || {}),
-				tags : new Set(data.tags || [])
-			}, name)
-		}
+	constructor(data = {}, name) {
+		super(data instanceof Post && data || {
+			...data,
+			meta : new Meta(data.meta || {}),
+			tags : new Set(data.tags || [])
+		}, name)
 	}
 
 	publishedAtDate() {

@@ -9,7 +9,7 @@ const MetaRecord = Record({
 
 export default class Meta extends MetaRecord {
 	constructor(data = {}, name) {
-		super({
+		super(data instanceof Meta && data || {
 			...data,
 			image : data.image && new Image(data.image) || null
 		}, name)

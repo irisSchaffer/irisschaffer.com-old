@@ -13,7 +13,7 @@ export function* fetchContent() {
 	return {
 		startPage : formatStartPage(startPage),
 		posts     : posts.map(formatPost),
-		footer
+		footer    : formatFooter(footer)
 	}
 }
 
@@ -31,7 +31,7 @@ const formatPost = post => {
 
 	return {
 		...post,
-		publishedAt : post.publishedAt || post.lastPublicationDate,
+		publishedAt : post.publishedAt || post.firstPublicationDate,
 		preamble    : preambleStripped,
 		body        : post.body && markdown(post.body),
 		meta        : getMeta(post, {
@@ -54,6 +54,11 @@ const formatStartPage = startPage => ({
 		title       : startPage.title,
 		description : startPage.subtitle
 	})
+})
+
+const formatFooter = footer => ({
+	...footer,
+	text : markdown(footer.text || '')
 })
 
 export default function* contentSaga() {

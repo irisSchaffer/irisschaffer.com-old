@@ -27,6 +27,7 @@ export async function getContent() {
 					id
 					slugs
 					publishedAt
+					firstPublicationDate
 					title
 					tags
 					metaTitle
