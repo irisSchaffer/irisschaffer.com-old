@@ -25,13 +25,9 @@ export default class StartPage extends StartPageRecord {
 			? data
 			: {
 				...data,
-				selected : new Set(data.selected),
-				image    : new Image(data.image),
-				meta     : new Meta({
-					...data.meta,
-					title       : data.meta.title || data.title,
-					description : data.meta.description || data.subtitle
-				}),
+				selected    : new Set(data.selected),
+				image       : new Image(data.image),
+				meta        : new Meta(data.meta),
 				socialLinks : new SocialLinks(data.socialLinks)
 			}
 

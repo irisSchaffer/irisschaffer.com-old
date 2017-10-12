@@ -1,80 +1,59 @@
 import { put, call, select } from 'redux-saga/effects'
+import striptags from 'striptags'
+import { truncate, markdown } from 'utils/string'
 
-import api from 'utils/api'
+import { getContent } from './api'
 
 import { setContent } from './actions'
 import { contentSelector } from './selectors'
 
 export function* fetchContent() {
-	const response = yield call(api, {
-		params : {
-			query : `{
-				startPage {
-					id
-					title
-					subtitle
-					image
-					metaTitle
-					metaDescription
-					metaImage
-					githubLink
-					twitterLink
-					facebookLink
-					linkedinLink
-					shownPosts
-					selected {
-						post {
-							id
-						}
-					}
-				}
-				post {
-					id
-					slugs
-					publishedAt
-					title
-					tags
-					metaTitle
-					metaDescription
-					metaImage
-					preamble
-					body
-				}
-				footer {
-					id
-					text
-				}
-			}`
-		}
-	})
-
-	const { post, footer } = response.data
-	const startPage = response.data.startPage[0]
+	const { startPage, posts, footer } = yield call(getContent)
 
 	return {
-		startPage : {
-			...startPage,
-			selected    : startPage.selected.map((s) => s.post.id),
-			meta        : getMeta(startPage),
-			socialLinks : {
-				github   : startPage.githubLink,
-				twitter  : startPage.twitterLink,
-				facebook : startPage.facebookLink,
-				linkedin : startPage.linkedinLink
-			}
-		},
-		footer : footer[0],
-		posts  : post.map(p => ({
-			...p,
-			meta : getMeta(p)
-		}))
+		startPage : formatStartPage(startPage),
+		posts     : posts.map(formatPost),
+		footer
 	}
 }
 
-const getMeta = obj => ({
-	title       : obj.metaTitle,
-	description : obj.metaDescription,
-	image       : obj.metaImage
+const getMeta = (data, defaults = {}) => ({
+	image       : data.metaImage || defaults.image,
+	title       : data.metaTitle || defaults.title,
+	description : data.metaDescription || defaults.subtitle
+})
+
+const formatPost = post => {
+	const preamble = post.preamble || post.body || ''
+	const preambleStripped = preamble.length <= 400
+		&& preamble
+		|| truncate(striptags(markdown(preamble)), 400)
+
+	return {
+		...post,
+		publishedAt : post.publishedAt || post.lastPublicationDate,
+		preamble    : preambleStripped,
+		body        : post.body && markdown(post.body),
+		meta        : getMeta(post, {
+			title       : post.title,
+			description : preambleStripped
+		})
+	}
+}
+
+const formatStartPage = startPage => ({
+	...startPage,
+	selected    : startPage.selected.map((s) => s.post.id),
+	socialLinks : {
+		github   : startPage.githubLink,
+		twitter  : startPage.twitterLink,
+		facebook : startPage.facebookLink,
+		linkedin : startPage.linkedinLink
+	},
+	meta : getMeta({
+		title       : startPage.title,
+		description : startPage.subtitle
+	})
 })
 
 export default function* contentSaga() {

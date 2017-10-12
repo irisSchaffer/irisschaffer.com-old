@@ -1,6 +1,4 @@
 import { Record, List, Set } from 'immutable'
-import striptags from 'striptags'
-import { truncate, markdown } from 'utils/string'
 import Meta from './Meta'
 
 const PostRecord = Record({
@@ -19,20 +17,9 @@ export default class Post extends PostRecord {
 		if (data instanceof Post) {
 			super(data, name)
 		} else {
-			const preamble = data.preamble || data.body || ''
-			const preambleStripped = preamble.length <= 400
-				&& preamble
-				|| truncate(striptags(markdown(preamble)), 400)
-
 			super({
 				...data,
-				preamble : preambleStripped,
-				body     : data.body && markdown(data.body),
-				meta     : new Meta({
-					...(data.meta || {}),
-					title       : data.meta.title || data.title,
-					description : data.meta.description || preambleStripped,
-				}),
+				meta : new Meta(data.meta || {}),
 				tags : new Set(data.tags || [])
 			}, name)
 		}
