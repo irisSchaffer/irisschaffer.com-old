@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import moment from 'moment'
 import classnames from 'classnames'
 
+import { date, time } from 'utils/date'
 import { back } from 'data/routing/actions'
 import { Records } from 'data/content'
 import { DisqusThread } from 'containers'
@@ -65,6 +65,7 @@ class PostPage extends PureComponent {
 
 	render() {
 		const { id, title, body, publishedAt, slugs, meta, tags } = this.props.post
+
 		const shareProps = {
 			pathname : slugs[0],
 			title
@@ -85,8 +86,8 @@ class PostPage extends PureComponent {
 				<section className={styles.articleSection}>
 					<aside className={styles.meta}>
 						<time dateTime={publishedAt}>
-							<span>{moment(publishedAt).format('LL')}</span>
-							<span>{moment(publishedAt).format('LT')}</span>
+							<span>{date(this.props.post.publishedAtDate())}</span>
+							<span>{time(this.props.post.publishedAtDate())}</span>
 						</time>
 						<Tags className={styles.tags} tags={tags} />
 					</aside>

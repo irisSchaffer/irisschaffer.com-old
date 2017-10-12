@@ -45,7 +45,6 @@
     "immutable": "^3.8.1",
     "jest": "^20.0.4",
     "marked": "^0.3.6",
-    "moment": "^2.18.1",
     "postcss-cssnext": "^2.11.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
@@ -98,7 +97,8 @@
     "stylelint-scss": "^2.1.0",
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-middleware": "^1.11.0",
-    "webpack-hot-middleware": "^2.18.2"
+    "webpack-hot-middleware": "^2.18.2",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "jest": {
     "moduleDirectories": [

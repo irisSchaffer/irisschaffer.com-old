@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import moment from 'moment'
 
+import { datetime } from 'utils/date'
 import { Records } from 'data/content'
 import { Link, Svg, Arrow, Tags } from 'components'
 
@@ -18,7 +18,7 @@ const PostPreview = ({ className, post }) => (
 						className={styles.publishedAt}
 						dateTime={post.publishedAt}
 					>
-						<Svg.Watch /> {moment(post.publishedAt).format('L LT')}
+						<Svg.Watch /> {datetime(post.publishedAtDate())}
 					</time>
 					<Tags tags={post.tags} className={styles.tags} />
 				</aside>
