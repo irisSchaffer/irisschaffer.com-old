@@ -93,4 +93,58 @@
 			background: none;
 		}
 	}
+
+	table {
+		width: 100%;
+
+		td,
+		th {
+			padding: 0.5em;
+
+			border: 1px solid var(--gray);
+		}
+
+		tr:nth-child(even) {
+			background-color: #f7f7f7;
+		}
+	}
+
+	aside {
+		width: calc(100% + 40px);
+		padding: 10px 20px;
+		margin-top: 1em;
+		position: relative;
+		right: -20px;
+		left: -20px;
+		border-top: 3px solid var(--gray);
+		background-color: #f7f7f7;
+
+		font-style: italic;
+
+		color: var(--gray);
+
+		&:before {
+			padding-right: 0.3em;
+
+			content: "Note:";
+			font-weight: 900;
+		}
+
+		@media (--tablet) {
+			width: calc(100% + 20px);
+			padding: 10px;
+			right: -10px;
+			left: -10px;
+		}
+	}
+
+	figure,
+	img {
+		margin: 1em 0;
+
+		figcaption {
+			font-style: italic;
+			margin-top: 0.3em;
+		}
+	}
 }
