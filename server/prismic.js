@@ -65,6 +65,8 @@ const format = (data) => {
 }
 
 module.exports = (app, path, cacheDuration = '1 day') => {
+	const loadedContent = getApiContent()
+
 	app.use(
 		`${path}/sync`,
 		bodyParser.json(),
@@ -80,8 +82,8 @@ module.exports = (app, path, cacheDuration = '1 day') => {
 	)
 
 	app.use(path, cache(cacheDuration), (req, res) => {
-		res.json(graphql(content, req.query.query))
+		loadedContent.then(
+			() => res.json(graphql(content, req.query.query))
+		)
 	})
-
-	getApiContent()
 }
