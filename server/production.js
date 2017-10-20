@@ -1,10 +1,12 @@
 const fs = require('fs')
 const express = require('express')
 
+const config = require('../lib/config')
 const render = require('../build/render')
 const assets = require('../build/assets.json')
-const chunks = require('../build/chunks.json')
 const icons = require('../build/icons.json')
+
+const runtime = fs.readFileSync(`${config.buildDir}/${assets.runtime.js}`, 'utf8')
 
 const compressions = [
 	{
@@ -41,7 +43,7 @@ module.exports = app => {
 		maxAge    : '1y'
 	}))
 
-	app.use('*', render.default({ assets, chunks, icons }))
+	app.use('*', render.default({ assets, runtime, icons }))
 
 	return app
 }

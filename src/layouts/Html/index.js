@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 
 const dev = process.env.NODE_ENV !== 'production'
 
-const Html = ({ content, state, assets, chunks, icons }) => {
+const Html = ({ content, state, assets, runtime, icons }) => {
 	const head = Helmet.renderStatic()
 	const headHtml = [
 		head.title.toString(),
@@ -45,10 +45,17 @@ const Html = ({ content, state, assets, chunks, icons }) => {
 
 				<div id="root" dangerouslySetInnerHTML={{ __html : content }} />
 
+				{runtime.length > 0 && (
+					<script
+						dangerouslySetInnerHTML={{
+							__html : runtime
+						}}
+					/>
+				)}
+
 				<script
 					dangerouslySetInnerHTML={{
 						__html : `
-							window.__CHUNK_MANIFEST__ = ${JSON.stringify(chunks)};
 							window.__INITIAL_STATE__ = ${JSON.stringify(state).replace(/</g, '\\u003c')};
 						`
 					}}
@@ -65,14 +72,14 @@ Html.propTypes = {
 	content : PropTypes.string.isRequired,
 	state   : PropTypes.string.isRequired,
 	assets  : PropTypes.object,
-	chunks  : PropTypes.object,
+	runtime : PropTypes.string,
 	icons   : PropTypes.object
 }
 
 Html.defaultProps = {
-	assets : {},
-	chunks : {},
-	icons  : {}
+	assets  : {},
+	runtime : '',
+	icons   : {}
 }
 
 export default Html
