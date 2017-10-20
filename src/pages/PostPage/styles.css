@@ -122,9 +122,10 @@
 
 			transition: width 0.2s ease;
 		}
-
-		&:hover:after {
-			width: 100%;
+		@media (hover: hover) {
+			&:hover:after {
+				width: 100%;
+			}
 		}
 
 		svg {

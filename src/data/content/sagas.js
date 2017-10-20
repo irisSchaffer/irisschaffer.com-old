@@ -20,7 +20,7 @@ export function* fetchContent() {
 const getMeta = (data, defaults = {}) => ({
 	image       : data.metaImage || defaults.image,
 	title       : data.metaTitle || defaults.title,
-	description : data.metaDescription || defaults.subtitle
+	description : data.metaDescription || defaults.description
 })
 
 const formatPost = post => {
@@ -50,7 +50,7 @@ const formatStartPage = startPage => ({
 		facebook : startPage.facebookLink,
 		linkedin : startPage.linkedinLink
 	},
-	meta : getMeta({
+	meta : getMeta(startPage, {
 		title       : startPage.title,
 		description : startPage.subtitle
 	})

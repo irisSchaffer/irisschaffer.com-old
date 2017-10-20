@@ -1,4 +1,6 @@
 import { Record, List, Set } from 'immutable'
+import { formatDateString } from 'utils/date'
+
 import Meta from './Meta'
 
 const PostRecord = Record({
@@ -22,6 +24,6 @@ export default class Post extends PostRecord {
 	}
 
 	publishedAtDate() {
-		return new Date(this.publishedAt)
+		return new Date(formatDateString(this.publishedAt))
 	}
 }

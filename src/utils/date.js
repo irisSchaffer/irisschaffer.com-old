@@ -1,5 +1,10 @@
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+export const formatDateString = dateString => dateString.replace(
+    /([\dT:-]+)\+(\d{2})(\d{2})$/g,
+    (match, date, hh, mm) => `${date}+${hh}:${mm}`
+)
+
 const withLeadingZero = num => {
 	const asString = String(num)
 	return asString.length === 1 && `0${asString}` || asString
