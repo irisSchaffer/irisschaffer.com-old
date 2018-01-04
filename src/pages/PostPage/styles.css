@@ -122,11 +122,6 @@
 
 			transition: width 0.2s ease;
 		}
-		@media (hover: hover) {
-			&:hover:after {
-				width: 100%;
-			}
-		}
 
 		svg {
 			max-width: 0.8em;
@@ -135,6 +130,12 @@
 
 			position: relative;
 			bottom: 0.1em;
+		}
+
+		@media (hover: hover) {
+			&:hover:after {
+				width: 100%;
+			}
 		}
 	}
 
