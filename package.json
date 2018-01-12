@@ -45,7 +45,7 @@
     "husky": "^0.14.3",
     "immutable": "^3.8.1",
     "jest": "^20.0.4",
-    "marked": "^0.3.7",
+    "marked": "^0.3.9",
     "name-all-modules-plugin": "^1.0.1",
     "postcss-cssnext": "^2.11.0",
     "postcss-import": "^10.0.0",
